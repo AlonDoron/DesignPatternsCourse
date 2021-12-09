@@ -22,14 +22,14 @@ namespace FacebookUI.Forms
 
           private void loadFavoritesPosts()
           {
-               m_FavoritePosts = FilesHelper.GetFavoritePosts();
+               m_FavoritePosts = FilesHandler.GetFavoritePosts();
           }
 
           private void loadPostsList()
           {
                listBoxPosts.Items.Clear();
 
-               foreach (Post post in FacebookApiHelper.GetPostsList())
+               foreach (Post post in FacebookApiHandler.GetPostsList())
                {
                     if (post.Message != null)
                     {
@@ -58,7 +58,7 @@ namespace FacebookUI.Forms
           {
                try
                {
-                    Status postedStatus = FacebookApiHelper.PostStatus(textBoxStatus.Text);
+                    Status postedStatus = FacebookApiHandler.PostStatus(textBoxStatus.Text);
                     MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
                }
                catch (Exception ex)
@@ -77,7 +77,7 @@ namespace FacebookUI.Forms
                if (listBoxPosts.SelectedIndex >= 0)
                {
                     string selectedText = listBoxPosts.SelectedItem.ToString();
-                    m_CurrentSelectedPost = FacebookApiHelper.GetPostByText(selectedText);
+                    m_CurrentSelectedPost = FacebookApiHandler.GetPostByText(selectedText);
 
                     if (i_E.Button == MouseButtons.Right && listBoxPosts.SelectedIndex >= 0)
                     {
@@ -118,7 +118,7 @@ namespace FacebookUI.Forms
                     break;
                }
 
-               FilesHelper.WritePostsListToFile(m_FavoritePosts);
+               FilesHandler.WritePostsListToFile(m_FavoritePosts);
                updateListBoxPosts();
 
                resetSelectedPost();
@@ -152,7 +152,7 @@ namespace FacebookUI.Forms
                     m_CurrentSelectedPost.Link);
 
                m_FavoritePosts.Add(p);
-               FilesHelper.WritePostsListToFile(m_FavoritePosts);
+               FilesHandler.WritePostsListToFile(m_FavoritePosts);
                resetSelectedPost();
           }
 
@@ -186,7 +186,7 @@ namespace FacebookUI.Forms
                {
                     foreach (PostObject favoritePost in m_FavoritePosts)
                     {
-                         foreach (Post postFromUserData in FacebookApiHelper.GetPostsList())
+                         foreach (Post postFromUserData in FacebookApiHandler.GetPostsList())
                          {
                               if (favoritePost.m_CreatedTime == postFromUserData.CreatedTime)
                               {

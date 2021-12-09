@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace FacebookLogic
 {
-     public static class FilesHelper
+     public static class FilesHandler
      {
           private const string k_FavoritesFile = "C:/temp/favorites.json";
 

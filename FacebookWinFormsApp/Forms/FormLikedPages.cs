@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void loadLikedPages()
           {
-               foreach (Page likedPage in FacebookApiHelper.GetLikedPagesList())
+               foreach (Page likedPage in FacebookApiHandler.GetLikedPagesList())
                {
                     listBoxLikedPages.Items.Add(likedPage);
                }

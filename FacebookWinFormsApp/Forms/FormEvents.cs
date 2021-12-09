@@ -18,7 +18,7 @@ namespace FacebookUI.Forms
                listBoxEvents.Items.Clear();
                listBoxEvents.DisplayMember = "Name";
 
-               foreach (Event fbEvent in FacebookApiHelper.GetEventsList())
+               foreach (Event fbEvent in FacebookApiHandler.GetEventsList())
                {
                     listBoxEvents.Items.Add(fbEvent);
                }

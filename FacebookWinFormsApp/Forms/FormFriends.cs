@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void showFriendsList()
           {
-               foreach (User friend in FacebookApiHelper.GetFriendsList())
+               foreach (User friend in FacebookApiHandler.GetFriendsList())
                {
                     listBoxFriends.Items.Add(friend);
                }
@@ -39,7 +39,7 @@ namespace FacebookUI.Forms
           {
                listBoxCommonLikedPages.Items.Clear();
 
-               foreach (Page page in FacebookApiHelper.GetSameLikedPagesList(i_SelectedFriend.LikedPages))
+               foreach (Page page in FacebookApiHandler.GetSameLikedPagesList(i_SelectedFriend.LikedPages))
                {
                     listBoxCommonLikedPages.Items.Add(page);
                }

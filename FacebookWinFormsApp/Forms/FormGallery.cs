@@ -16,7 +16,7 @@ namespace FacebookUI.Forms
           {
                listBoxPhotos.Items.Clear();
 
-               foreach (Album album in FacebookApiHelper.GetAlbumsList())
+               foreach (Album album in FacebookApiHandler.GetAlbumsList())
                {
                     listBoxPhotos.Items.Add(album);
                }
@@ -31,7 +31,7 @@ namespace FacebookUI.Forms
           {
                listBoxPhotos.Items.Clear();
 
-               foreach (Album album in FacebookApiHelper.GetAlbumsList())
+               foreach (Album album in FacebookApiHandler.GetAlbumsList())
                {
                     foreach (Photo albumPhoto in album.Photos)
                     {

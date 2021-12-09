@@ -50,8 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FacebookApiHelper.cs" />
-    <Compile Include="FilesHelper.cs" />
+    <Compile Include="FacebookApiHandler.cs" />
+    <Compile Include="FilesHandler.cs" />
     <Compile Include="PostObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

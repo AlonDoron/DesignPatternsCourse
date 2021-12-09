@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void loadGroups()
           {
-               foreach (Group group in FacebookApiHelper.GetGroupsList())
+               foreach (Group group in FacebookApiHandler.GetGroupsList())
                {
                     listBoxGroups.Items.Add(group);
                }
