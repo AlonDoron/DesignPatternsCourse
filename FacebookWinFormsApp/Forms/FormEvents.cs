@@ -15,18 +15,7 @@ namespace FacebookUI.Forms
 
           private void fetchEvents()
           {
-               listBoxEvents.Items.Clear();
-               listBoxEvents.DisplayMember = "Name";
-
-               foreach (Event fbEvent in FacebookApiHandler.GetEventsList())
-               {
-                    listBoxEvents.Items.Add(fbEvent);
-               }
-
-               if (listBoxEvents.Items.Count == 0)
-               {
-                    MessageBox.Show("No Events to retrieve :(");
-               }
+               eventBindingSource.DataSource = FacebookApiHandler.GetEventsList();
           }
 
           private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,8 +23,6 @@ namespace FacebookUI.Forms
                if (listBoxEvents.SelectedItem is Event selectedEvent)
                {
                     loadEventImage(selectedEvent);
-                    markDate(selectedEvent);
-                    monthCalendarEvents.Show();
                }
           }
 
@@ -44,17 +31,6 @@ namespace FacebookUI.Forms
                if (listBoxEvents.SelectedItems.Count == 1)
                {
                     pictureBoxEvents.LoadAsync(i_SelectedEvent.Cover.SourceURL);
-               }
-          }
-
-          private void markDate(Event i_SelectedEvent)
-          {
-               if (i_SelectedEvent.StartTime != null)
-               {
-                    monthCalendarEvents.BoldedDates = new DateTime[]
-                    {
-                         (DateTime)i_SelectedEvent.StartTime
-                    };
                }
           }
      }
