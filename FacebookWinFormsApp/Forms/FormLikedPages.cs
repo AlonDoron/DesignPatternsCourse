@@ -15,23 +15,7 @@ namespace FacebookUI.Forms
 
           private void loadLikedPages()
           {
-               foreach (Page likedPage in FacebookApiHandler.GetLikedPagesList())
-               {
-                    listBoxLikedPages.Items.Add(likedPage);
-               }
-          }
-
-          private void listBoxLikedPages_SelectedIndexChanged(object sender, EventArgs e)
-          {
-               if (listBoxLikedPages.SelectedItem is Page selectedPage)
-               {
-                    displayPageAbout(selectedPage);
-               }
-          }
-
-          private void displayPageAbout(Page i_SelectedPage)
-          {
-               richTextBoxPageDetails.Text = i_SelectedPage.Description;
+               pageBindingSource.DataSource = FacebookApiHandler.GetLikedPagesList();
           }
      }
 }

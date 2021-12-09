@@ -15,22 +15,7 @@ namespace FacebookUI.Forms
 
           private void loadGroups()
           {
-               foreach (Group group in FacebookApiHandler.GetGroupsList())
-               {
-                    listBoxGroups.Items.Add(group);
-               }
-
-               if (listBoxGroups.Items.Count == 0)
-               {
-                    listBoxGroups.Items.Add("You have no groups :(");
-                    this.listBoxGroups.SelectedIndexChanged -= listBoxGroups_SelectedIndexChanged;
-               }
-          }
-
-          private void listBoxGroups_SelectedIndexChanged(object sender, EventArgs e)
-          {
-               Group selectedGroup = listBoxGroups.SelectedItem as Group;
-               pictureBoxGroup.Image = selectedGroup.ImageNormal;
+               groupBindingSource.DataSource = FacebookApiHandler.GetGroupsList();
           }
      }
 }

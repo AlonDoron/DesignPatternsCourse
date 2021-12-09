@@ -15,10 +15,7 @@ namespace FacebookUI.Forms
 
           private void showFriendsList()
           {
-               foreach (User friend in FacebookApiHandler.GetFriendsList())
-               {
-                    listBoxFriends.Items.Add(friend);
-               }
+               membersBindingSource.DataSource = FacebookApiHandler.GetFriendsList();
           }
 
           private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
@@ -48,11 +45,7 @@ namespace FacebookUI.Forms
           private void displayFriendData(User i_SelectedFriend)
           {
                pictureBoxFriendPicture.Image = i_SelectedFriend.ImageNormal;
-               richTextBoxFriendDetails.Text = $@"Name: {i_SelectedFriend.Name}
-Birth Day: {i_SelectedFriend.Birthday}
-Gender: {i_SelectedFriend.Gender}
-Latest Post: 
-{i_SelectedFriend.Posts[0].Description}";
+               richTextBoxFriendDetails.Text = i_SelectedFriend.Posts[0].Description;
           }
 
           private void listBoxCommonLikedPages_SelectedIndexChanged(object sender, EventArgs e)
