@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using BasicFacebookFeatures.Forms;
 using Newtonsoft.Json;
 
-namespace BasicFacebookFeatures
+namespace FacebookLogic
 {
      public static class FilesHelper
      {

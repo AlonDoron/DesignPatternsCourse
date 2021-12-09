@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using FacebookLogic;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookUI.Forms
 {
      public partial class FormPosts : Form
      {
@@ -194,11 +195,9 @@ namespace BasicFacebookFeatures.Forms
                          }
                     }
                }
-
-               // If we de-selected "Show Favorite Posts"
                else
                {
-                    loadPostsList();
+                    loadPostsList(); // If we de-selected "Show Favorite Posts"
                }
           }
      }

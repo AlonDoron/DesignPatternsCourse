@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
+using FacebookLogic;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookUI.Forms
 {
      public partial class FormEvents : Form
      {
@@ -16,7 +17,7 @@ namespace BasicFacebookFeatures.Forms
           {
                listBoxEvents.Items.Clear();
                listBoxEvents.DisplayMember = "Name";
-               
+
                foreach (Event fbEvent in FacebookApiHelper.GetEventsList())
                {
                     listBoxEvents.Items.Add(fbEvent);
@@ -30,10 +31,12 @@ namespace BasicFacebookFeatures.Forms
 
           private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
           {
-               Event selectedEvent = listBoxEvents.SelectedItem as Event;
-               loadEventImage(selectedEvent);
-               markDate(selectedEvent);
-               monthCalendarEvents.Show();
+               if (listBoxEvents.SelectedItem is Event selectedEvent)
+               {
+                    loadEventImage(selectedEvent);
+                    markDate(selectedEvent);
+                    monthCalendarEvents.Show();
+               }
           }
 
           private void loadEventImage(Event i_SelectedEvent)

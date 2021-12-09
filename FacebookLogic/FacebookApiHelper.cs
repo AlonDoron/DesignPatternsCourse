@@ -1,14 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures
+namespace FacebookLogic
 {
      public class FacebookApiHelper
      {
           private const string k_PictureUrlStartString = "https://";
           private static User s_User;
+
+          public static LoginResult Login()
+          {
+               return FacebookService.Login(
+                    "2016566511844897",
+                    "email",
+                    "public_profile",
+                    "user_age_range",
+                    "user_birthday",
+                    "user_events",
+                    "user_friends",
+                    "user_gender",
+                    "user_hometown",
+                    "user_likes",
+                    "user_link",
+                    "user_location",
+                    "user_photos",
+                    "user_posts",
+                    "user_videos");
+          }
 
           public static void SetUser(User i_User)
           {

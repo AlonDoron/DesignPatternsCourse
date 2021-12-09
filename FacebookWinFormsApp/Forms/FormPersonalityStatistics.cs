@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using FacebookLogic;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookUI.Forms
 {
      public partial class FormPersonalityStatistics : Form
      {

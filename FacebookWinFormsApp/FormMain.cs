@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using BasicFacebookFeatures.Forms;
-using FacebookWrapper.ObjectModel;
+using FacebookUI.Forms;
+using FacebookLogic;
 using FacebookWrapper;
 
-namespace BasicFacebookFeatures
+namespace FacebookUI
 {
      public partial class FormMain : Form
      {
@@ -21,22 +20,7 @@ namespace BasicFacebookFeatures
           {
                Clipboard.SetText("alon121211@gmail.com");
 
-               LoginResult loginResult = FacebookService.Login(
-                    "2016566511844897",
-                    "email",
-                    "public_profile",
-                    "user_age_range",
-                    "user_birthday",
-                    "user_events",
-                    "user_friends",
-                    "user_gender",
-                    "user_hometown",
-                    "user_likes",
-                    "user_link",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_videos");
+               LoginResult loginResult = FacebookApiHelper.Login();
 
                if (!string.IsNullOrEmpty(loginResult.AccessToken))
                {

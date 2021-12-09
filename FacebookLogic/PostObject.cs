@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookLogic
 {
      public class PostObject
      {

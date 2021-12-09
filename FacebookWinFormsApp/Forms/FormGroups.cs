@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
+using FacebookLogic;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookUI.Forms
 {
      public partial class FormGroups : Form
      {
