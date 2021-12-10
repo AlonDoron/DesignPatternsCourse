@@ -4,7 +4,7 @@ using FacebookUI.Forms;
 
 namespace FacebookUI
 {
-     public class FormFactory
+     public static class FormFactory
      {
           public enum eFormType
           {
