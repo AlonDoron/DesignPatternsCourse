@@ -15,7 +15,7 @@ namespace FacebookUI
                FacebookService.s_UseForamttedToStrings = true;
                Application.EnableVisualStyles();
                Application.SetCompatibleTextRenderingDefault(false);
-               Application.Run(new FormMain());
+               Application.Run(FormFactory.CreateFormByType(FormFactory.eFormType.FormMain));
           }
      }
 }

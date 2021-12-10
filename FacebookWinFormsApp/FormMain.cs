@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using FacebookUI.Forms;
 using FacebookLogic;
 using FacebookWrapper;
 
@@ -50,7 +49,7 @@ namespace FacebookUI
                this.Close();
           }
 
-          private void openChildForm(Form i_childForm, object sender)
+          private void openChildForm(Form i_childForm)
           {
                m_ActiveForm?.Close();
 
@@ -68,37 +67,44 @@ namespace FacebookUI
 
           private void buttonPosts_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormPosts(), sender);
+               Form formPosts = FormFactory.CreateFormByType(FormFactory.eFormType.FormPosts);
+               openChildForm(formPosts);
           }
 
           private void buttonGallery_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormGallery(), sender);
+               Form formGallery = FormFactory.CreateFormByType(FormFactory.eFormType.FormGallery);
+               openChildForm(formGallery);
           }
 
           private void buttonEvents_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormEvents(), sender);
+               Form formEvents = FormFactory.CreateFormByType(FormFactory.eFormType.FormEvents);
+               openChildForm(formEvents);
           }
 
           private void buttonGroups_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormGroups(), sender);
+               Form formGroups = FormFactory.CreateFormByType(FormFactory.eFormType.FormGroups);
+               openChildForm(formGroups);
           }
 
           private void buttonLikedPages_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormLikedPages(), sender);
+               Form formLikedPages = FormFactory.CreateFormByType(FormFactory.eFormType.FormLikedPages);
+               openChildForm(formLikedPages);
           }
 
           private void buttonFriends_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormFriends(), sender);
+               Form formFriends = FormFactory.CreateFormByType(FormFactory.eFormType.FormFriends);
+               openChildForm(formFriends);
           }
 
           private void buttonPersonality_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormPersonalityStatistics(), sender);
+               Form formPersonalityStatistics = FormFactory.CreateFormByType(FormFactory.eFormType.FormPersonalityStatistics);
+               openChildForm(formPersonalityStatistics);
           }
      }
 }

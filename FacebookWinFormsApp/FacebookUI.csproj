@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormFactory.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
