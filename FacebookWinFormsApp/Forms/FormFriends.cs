@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void showFriendsList()
           {
-               membersBindingSource.DataSource = FacebookApiHandler.GetFriendsList();
+               membersBindingSource.DataSource = FacebookApiFacade.GetFriendsList();
           }
 
           private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace FacebookUI.Forms
           {
                listBoxCommonLikedPages.Items.Clear();
 
-               foreach (Page page in FacebookApiHandler.GetSameLikedPagesList(i_SelectedFriend.LikedPages))
+               foreach (Page page in FacebookApiFacade.GetSameLikedPagesList(i_SelectedFriend.LikedPages))
                {
                     listBoxCommonLikedPages.Items.Add(page);
                }

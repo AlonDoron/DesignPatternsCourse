@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void fetchEvents()
           {
-               eventBindingSource.DataSource = FacebookApiHandler.GetEventsList();
+               eventBindingSource.DataSource = FacebookApiFacade.GetEventsList();
           }
 
           private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)

@@ -29,7 +29,7 @@ namespace FacebookUI.Forms
           {
                listBoxPosts.Items.Clear();
 
-               foreach (Post post in FacebookApiHandler.GetPostsList())
+               foreach (Post post in FacebookApiFacade.GetPostsList())
                {
                     if (post.Message != null)
                     {
@@ -58,7 +58,7 @@ namespace FacebookUI.Forms
           {
                try
                {
-                    Status postedStatus = FacebookApiHandler.PostStatus(textBoxStatus.Text);
+                    Status postedStatus = FacebookApiFacade.PostStatus(textBoxStatus.Text);
                     MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
                }
                catch (Exception ex)
@@ -77,7 +77,7 @@ namespace FacebookUI.Forms
                if (listBoxPosts.SelectedIndex >= 0)
                {
                     string selectedText = listBoxPosts.SelectedItem.ToString();
-                    m_CurrentSelectedPost = FacebookApiHandler.GetPostByText(selectedText);
+                    m_CurrentSelectedPost = FacebookApiFacade.GetPostByText(selectedText);
 
                     if (i_E.Button == MouseButtons.Right && listBoxPosts.SelectedIndex >= 0)
                     {
@@ -186,7 +186,7 @@ namespace FacebookUI.Forms
                {
                     foreach (PostObject favoritePost in m_FavoritePosts)
                     {
-                         foreach (Post postFromUserData in FacebookApiHandler.GetPostsList())
+                         foreach (Post postFromUserData in FacebookApiFacade.GetPostsList())
                          {
                               if (favoritePost.m_CreatedTime == postFromUserData.CreatedTime)
                               {

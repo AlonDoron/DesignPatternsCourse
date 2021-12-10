@@ -6,7 +6,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookLogic
 {
-     public class FacebookApiHandler
+     public class FacebookApiFacade
      {
           private const string k_PictureUrlStartString = "https://";
           private static User s_User;

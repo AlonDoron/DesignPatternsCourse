@@ -20,19 +20,19 @@ namespace FacebookUI.Forms
                m_UserStatistics = new Dictionary<string, string>
                     {
                          {
-                         "posts", FacebookApiHandler.GetPostsList().Count.ToString()
+                         "posts", FacebookApiFacade.GetPostsList().Count.ToString()
                          },
                          {
-                         "friends", FacebookApiHandler.GetFriendsList().Count.ToString()
+                         "friends", FacebookApiFacade.GetFriendsList().Count.ToString()
                          },
                          {
-                         "events", FacebookApiHandler.GetEventsList().Count.ToString()
+                         "events", FacebookApiFacade.GetEventsList().Count.ToString()
                          },
                          {
-                         "groups", FacebookApiHandler.GetGroupsList().Count.ToString()
+                         "groups", FacebookApiFacade.GetGroupsList().Count.ToString()
                          },
                          {
-                         "likedPages", FacebookApiHandler.GetLikedPagesList().Count.ToString()
+                         "likedPages", FacebookApiFacade.GetLikedPagesList().Count.ToString()
                     }
                     };
 
@@ -48,8 +48,8 @@ namespace FacebookUI.Forms
           {
                try
                {
-                    Dictionary<string, int> likesByCategory = FacebookApiHandler.GetLikesByCategory();
-                    setStatisticsText(likesByCategory, FacebookApiHandler.GetLikedPagesList().Count);
+                    Dictionary<string, int> likesByCategory = FacebookApiFacade.GetLikesByCategory();
+                    setStatisticsText(likesByCategory, FacebookApiFacade.GetLikedPagesList().Count);
                }
                catch (Exception e)
                {

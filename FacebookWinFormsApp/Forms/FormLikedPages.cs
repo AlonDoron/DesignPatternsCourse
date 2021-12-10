@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void loadLikedPages()
           {
-               pageBindingSource.DataSource = FacebookApiHandler.GetLikedPagesList();
+               pageBindingSource.DataSource = FacebookApiFacade.GetLikedPagesList();
           }
      }
 }

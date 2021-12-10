@@ -19,15 +19,15 @@ namespace FacebookUI
           {
                Clipboard.SetText("alon121211@gmail.com");
 
-               LoginResult loginResult = FacebookApiHandler.Login();
+               LoginResult loginResult = FacebookApiFacade.Login();
 
                if (!string.IsNullOrEmpty(loginResult.AccessToken))
                {
-                    FacebookApiHandler.SetUser(loginResult.LoggedInUser);
+                    FacebookApiFacade.SetUser(loginResult.LoggedInUser);
 
-                    setUserImage(FacebookApiHandler.GetUserImageURL());
+                    setUserImage(FacebookApiFacade.GetUserImageURL());
 
-                    labelUsername.Text = FacebookApiHandler.GetUsernameText();
+                    labelUsername.Text = FacebookApiFacade.GetUsernameText();
 
                     panelSidebar.Show();
                     buttonLogin.Hide();

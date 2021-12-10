@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void loadGroups()
           {
-               groupBindingSource.DataSource = FacebookApiHandler.GetGroupsList();
+               groupBindingSource.DataSource = FacebookApiFacade.GetGroupsList();
           }
      }
 }
