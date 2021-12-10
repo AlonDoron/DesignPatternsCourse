@@ -1,12 +1,12 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using FacebookLogic;
-using FacebookWrapper.ObjectModel;
 
 namespace FacebookUI.Forms
 {
      public partial class FormLikedPages : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormLikedPages()
           {
                InitializeComponent();
@@ -15,7 +15,7 @@ namespace FacebookUI.Forms
 
           private void loadLikedPages()
           {
-               pageBindingSource.DataSource = FacebookApiFacade.GetLikedPagesList();
+               pageBindingSource.DataSource = FacebookApi.GetLikedPagesList();
           }
      }
 }

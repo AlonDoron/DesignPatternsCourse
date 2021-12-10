@@ -13,6 +13,8 @@ namespace FacebookUI.Forms
           public List<PostObject> m_FavoritePosts;
           private Post m_CurrentSelectedPost;
 
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormPosts()
           {
                loadFavoritesPosts();
@@ -29,7 +31,7 @@ namespace FacebookUI.Forms
           {
                listBoxPosts.Items.Clear();
 
-               foreach (Post post in FacebookApiFacade.GetPostsList())
+               foreach (Post post in FacebookApi.GetPostsList())
                {
                     if (post.Message != null)
                     {
@@ -58,7 +60,7 @@ namespace FacebookUI.Forms
           {
                try
                {
-                    Status postedStatus = FacebookApiFacade.PostStatus(textBoxStatus.Text);
+                    Status postedStatus = FacebookApi.PostStatus(textBoxStatus.Text);
                     MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
                }
                catch (Exception ex)
@@ -77,7 +79,7 @@ namespace FacebookUI.Forms
                if (listBoxPosts.SelectedIndex >= 0)
                {
                     string selectedText = listBoxPosts.SelectedItem.ToString();
-                    m_CurrentSelectedPost = FacebookApiFacade.GetPostByText(selectedText);
+                    m_CurrentSelectedPost = FacebookApi.GetPostByText(selectedText);
 
                     if (i_E.Button == MouseButtons.Right && listBoxPosts.SelectedIndex >= 0)
                     {
@@ -186,7 +188,7 @@ namespace FacebookUI.Forms
                {
                     foreach (PostObject favoritePost in m_FavoritePosts)
                     {
-                         foreach (Post postFromUserData in FacebookApiFacade.GetPostsList())
+                         foreach (Post postFromUserData in FacebookApi.GetPostsList())
                          {
                               if (favoritePost.m_CreatedTime == postFromUserData.CreatedTime)
                               {

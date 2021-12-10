@@ -7,6 +7,8 @@ namespace FacebookUI.Forms
 {
      public partial class FormGallery : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormGallery()
           {
                InitializeComponent();
@@ -16,7 +18,7 @@ namespace FacebookUI.Forms
           {
                listBoxPhotos.Items.Clear();
 
-               foreach (Album album in FacebookApiFacade.GetAlbumsList())
+               foreach (Album album in FacebookApi.GetAlbumsList())
                {
                     listBoxPhotos.Items.Add(album);
                }
@@ -31,7 +33,7 @@ namespace FacebookUI.Forms
           {
                listBoxPhotos.Items.Clear();
 
-               foreach (Album album in FacebookApiFacade.GetAlbumsList())
+               foreach (Album album in FacebookApi.GetAlbumsList())
                {
                     foreach (Photo albumPhoto in album.Photos)
                     {

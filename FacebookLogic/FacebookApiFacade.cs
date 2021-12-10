@@ -6,12 +6,37 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookLogic
 {
-     public class FacebookApiFacade
+     public sealed class FacebookApiFacade
      {
           private const string k_PictureUrlStartString = "https://";
           private static User s_User;
 
-          public static LoginResult Login()
+          private static readonly object sr_InstanceCreate = new object();
+          private static FacebookApiFacade s_Instance;
+          public static FacebookApiFacade Instance
+          {
+               get
+               {
+                    if (s_Instance == null)
+                    {
+                         lock (sr_InstanceCreate)
+                         {
+                              if (s_Instance == null)
+                              {
+                                   s_Instance = new FacebookApiFacade();
+                              }
+                         }
+                    }
+
+                    return s_Instance;
+               }
+          }
+
+          private FacebookApiFacade()
+          {
+          }
+
+          public LoginResult Login()
           {
                return FacebookService.Login(
                     "2016566511844897",
@@ -31,52 +56,52 @@ namespace FacebookLogic
                     "user_videos");
           }
 
-          public static void SetUser(User i_User)
+          public void SetUser(User i_User)
           {
                s_User = i_User;
           }
 
-          public static string GetUsernameText()
+          public string GetUsernameText()
           {
                return s_User.Name;
           }
 
-          public static string GetUserImageURL()
+          public string GetUserImageURL()
           {
                return s_User.PictureNormalURL;
           }
 
-          public static FacebookObjectCollection<Post> GetPostsList()
+          public FacebookObjectCollection<Post> GetPostsList()
           {
                return s_User.Posts;
           }
 
-          public static FacebookObjectCollection<Album> GetAlbumsList()
+          public FacebookObjectCollection<Album> GetAlbumsList()
           {
                return s_User.Albums;
           }
 
-          public static FacebookObjectCollection<Event> GetEventsList()
+          public FacebookObjectCollection<Event> GetEventsList()
           {
                return s_User.Events;
           }
 
-          public static FacebookObjectCollection<Group> GetGroupsList()
+          public FacebookObjectCollection<Group> GetGroupsList()
           {
                return s_User.Groups;
           }
 
-          public static FacebookObjectCollection<Page> GetLikedPagesList()
+          public FacebookObjectCollection<Page> GetLikedPagesList()
           {
                return s_User.LikedPages;
           }
 
-          public static FacebookObjectCollection<User> GetFriendsList()
+          public FacebookObjectCollection<User> GetFriendsList()
           {
                return s_User.Friends;
           }
 
-          public static FacebookObjectCollection<Page> GetSameLikedPagesList(FacebookObjectCollection<Page> i_SelectedFriendLikedPages)
+          public FacebookObjectCollection<Page> GetSameLikedPagesList(FacebookObjectCollection<Page> i_SelectedFriendLikedPages)
           {
                FacebookObjectCollection<Page> commonLikedPages = new FacebookObjectCollection<Page>();
 
@@ -94,7 +119,7 @@ namespace FacebookLogic
                return commonLikedPages;
           }
 
-          public static Dictionary<string, int> GetLikesByCategory()
+          public Dictionary<string, int> GetLikesByCategory()
           {
                Dictionary<string, int> results = new Dictionary<string, int>();
 
@@ -116,12 +141,12 @@ namespace FacebookLogic
                return results;
           }
 
-          public static Status PostStatus(string i_Text)
+          public Status PostStatus(string i_Text)
           {
                return s_User.PostStatus(i_Text);
           }
 
-          public static Post GetPostByText(string i_SelectedText)
+          public Post GetPostByText(string i_SelectedText)
           {
                return i_SelectedText.Contains(k_PictureUrlStartString)
                     ? s_User.Posts

@@ -7,6 +7,7 @@ namespace FacebookUI.Forms
 {
      public partial class FormEvents : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
           public FormEvents()
           {
                InitializeComponent();
@@ -15,7 +16,7 @@ namespace FacebookUI.Forms
 
           private void fetchEvents()
           {
-               eventBindingSource.DataSource = FacebookApiFacade.GetEventsList();
+               eventBindingSource.DataSource = FacebookApi.GetEventsList();
           }
 
           private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)

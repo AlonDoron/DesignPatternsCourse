@@ -8,6 +8,7 @@ namespace FacebookUI
      public partial class FormMain : Form
      {
           private Form m_ActiveForm;
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
           public FormMain()
           {
@@ -19,15 +20,15 @@ namespace FacebookUI
           {
                Clipboard.SetText("alon121211@gmail.com");
 
-               LoginResult loginResult = FacebookApiFacade.Login();
+               LoginResult loginResult = FacebookApi.Login();
 
                if (!string.IsNullOrEmpty(loginResult.AccessToken))
                {
-                    FacebookApiFacade.SetUser(loginResult.LoggedInUser);
+                    FacebookApi.SetUser(loginResult.LoggedInUser);
 
-                    setUserImage(FacebookApiFacade.GetUserImageURL());
+                    setUserImage(FacebookApi.GetUserImageURL());
 
-                    labelUsername.Text = FacebookApiFacade.GetUsernameText();
+                    labelUsername.Text = FacebookApi.GetUsernameText();
 
                     panelSidebar.Show();
                     buttonLogin.Hide();

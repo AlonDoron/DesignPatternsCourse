@@ -8,6 +8,7 @@ namespace FacebookUI.Forms
      public partial class FormPersonalityStatistics : Form
      {
           private Dictionary<string, string> m_UserStatistics;
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
           public FormPersonalityStatistics()
           {
@@ -20,19 +21,19 @@ namespace FacebookUI.Forms
                m_UserStatistics = new Dictionary<string, string>
                     {
                          {
-                         "posts", FacebookApiFacade.GetPostsList().Count.ToString()
+                         "posts", FacebookApi.GetPostsList().Count.ToString()
                          },
                          {
-                         "friends", FacebookApiFacade.GetFriendsList().Count.ToString()
+                         "friends", FacebookApi.GetFriendsList().Count.ToString()
                          },
                          {
-                         "events", FacebookApiFacade.GetEventsList().Count.ToString()
+                         "events", FacebookApi.GetEventsList().Count.ToString()
                          },
                          {
-                         "groups", FacebookApiFacade.GetGroupsList().Count.ToString()
+                         "groups", FacebookApi.GetGroupsList().Count.ToString()
                          },
                          {
-                         "likedPages", FacebookApiFacade.GetLikedPagesList().Count.ToString()
+                         "likedPages", FacebookApi.GetLikedPagesList().Count.ToString()
                     }
                     };
 
@@ -48,8 +49,8 @@ namespace FacebookUI.Forms
           {
                try
                {
-                    Dictionary<string, int> likesByCategory = FacebookApiFacade.GetLikesByCategory();
-                    setStatisticsText(likesByCategory, FacebookApiFacade.GetLikedPagesList().Count);
+                    Dictionary<string, int> likesByCategory = FacebookApi.GetLikesByCategory();
+                    setStatisticsText(likesByCategory, FacebookApi.GetLikedPagesList().Count);
                }
                catch (Exception e)
                {

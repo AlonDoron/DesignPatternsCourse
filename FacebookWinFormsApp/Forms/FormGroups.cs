@@ -7,6 +7,8 @@ namespace FacebookUI.Forms
 {
      public partial class FormGroups : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormGroups()
           {
                InitializeComponent();
@@ -15,7 +17,7 @@ namespace FacebookUI.Forms
 
           private void loadGroups()
           {
-               groupBindingSource.DataSource = FacebookApiFacade.GetGroupsList();
+               groupBindingSource.DataSource = FacebookApi.GetGroupsList();
           }
      }
 }
