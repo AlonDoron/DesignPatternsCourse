@@ -99,7 +99,7 @@
                this.descriptionRichTextBox.Name = "descriptionRichTextBox";
                this.descriptionRichTextBox.Size = new System.Drawing.Size(286, 125);
                this.descriptionRichTextBox.TabIndex = 9;
-               this.descriptionRichTextBox.Text = "";
+               this.descriptionRichTextBox.Text = string.Empty;
                // 
                // FormGroups
                // 

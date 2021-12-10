@@ -1,4 +1,6 @@
-﻿namespace FacebookUI.Forms
+﻿using System;
+
+namespace FacebookUI.Forms
 {
      public partial class FormLikedPages
      {
@@ -92,7 +94,7 @@
                this.descriptionRichTextBox.Name = "descriptionRichTextBox";
                this.descriptionRichTextBox.Size = new System.Drawing.Size(289, 365);
                this.descriptionRichTextBox.TabIndex = 10;
-               this.descriptionRichTextBox.Text = "";
+               this.descriptionRichTextBox.Text = string.Empty;
                // 
                // imageNormalPictureBox
                // 

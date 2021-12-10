@@ -8,6 +8,7 @@ namespace FacebookUI.Forms
      public partial class FormEvents : Form
      {
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormEvents()
           {
                InitializeComponent();

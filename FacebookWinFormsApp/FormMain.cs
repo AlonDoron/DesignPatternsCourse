@@ -8,6 +8,7 @@ namespace FacebookUI
      public partial class FormMain : Form
      {
           private Form m_ActiveForm;
+
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
           public FormMain()

@@ -9,10 +9,11 @@ namespace FacebookLogic
      public sealed class FacebookApiFacade
      {
           private const string k_PictureUrlStartString = "https://";
+          private static readonly object sr_InstanceCreate = new object();
           private static User s_User;
 
-          private static readonly object sr_InstanceCreate = new object();
           private static FacebookApiFacade s_Instance;
+
           public static FacebookApiFacade Instance
           {
                get

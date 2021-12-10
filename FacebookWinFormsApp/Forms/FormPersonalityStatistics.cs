@@ -8,6 +8,7 @@ namespace FacebookUI.Forms
      public partial class FormPersonalityStatistics : Form
      {
           private Dictionary<string, string> m_UserStatistics;
+
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
           public FormPersonalityStatistics()
