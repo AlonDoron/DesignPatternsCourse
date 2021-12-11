@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace FacebookUI.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPosts
      {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using FacebookLogic;
+using FacebookWinFormsApp;
 using FacebookWrapper.ObjectModel;
 
-namespace FacebookUI.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormFriends : Form
      {

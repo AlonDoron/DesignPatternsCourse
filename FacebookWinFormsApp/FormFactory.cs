@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using FacebookUI.Forms;
+using FacebookWinFormsApp.Forms;
 
-namespace FacebookUI
+namespace FacebookWinFormsApp
 {
      public static class FormFactory
      {

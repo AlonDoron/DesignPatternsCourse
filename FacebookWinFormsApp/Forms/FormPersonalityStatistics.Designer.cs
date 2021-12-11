@@ -1,4 +1,4 @@
-﻿namespace FacebookUI.Forms
+﻿namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPersonalityStatistics
      {

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using FacebookWrapper;
 
-namespace FacebookUI
+namespace FacebookWinFormsApp
 {
      public static class Program
      {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FacebookUI.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormLikedPages
      {

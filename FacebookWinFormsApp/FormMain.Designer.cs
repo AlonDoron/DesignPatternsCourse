@@ -1,4 +1,4 @@
-﻿namespace FacebookUI
+﻿namespace FacebookWinFormsApp
 {
      public partial class FormMain
      {

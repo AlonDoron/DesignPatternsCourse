@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
-using FacebookLogic;
-using FacebookUI.Forms;
+using FacebookWinFormsApp;
+using FacebookWinFormsApp.Forms;
 using FacebookWrapper;
 
-namespace FacebookUI
+namespace FacebookWinFormsApp
 {
      public partial class FormMain : Form
      {
