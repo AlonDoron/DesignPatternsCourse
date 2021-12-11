@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using FacebookWinFormsApp;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookWinFormsApp.Forms
