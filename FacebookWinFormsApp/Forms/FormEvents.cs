@@ -12,12 +12,19 @@ namespace FacebookUI.Forms
           public FormEvents()
           {
                InitializeComponent();
-               fetchEvents();
           }
 
-          private void fetchEvents()
+          public void FetchEvents()
           {
-               eventBindingSource.DataSource = FacebookApi.GetEventsList();
+               try
+               {
+                    this.Invoke(new Action(() => eventBindingSource.DataSource = FacebookApi.GetEventsList()));
+               }
+               catch (Exception e)
+               {
+                    MessageBox.Show(e.Message);
+                    throw;
+               }
           }
 
           private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)

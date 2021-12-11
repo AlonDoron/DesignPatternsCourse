@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using FacebookLogic;
+using FacebookUI.Forms;
 using FacebookWrapper;
 
 namespace FacebookUI
@@ -83,24 +85,28 @@ namespace FacebookUI
           {
                Form formEvents = FormFactory.CreateFormByType(FormFactory.eFormType.FormEvents);
                openChildForm(formEvents);
+               new Thread(((FormEvents)formEvents).FetchEvents).Start();
           }
 
           private void buttonGroups_Click(object sender, EventArgs e)
           {
                Form formGroups = FormFactory.CreateFormByType(FormFactory.eFormType.FormGroups);
                openChildForm(formGroups);
+               new Thread(((FormGroups)formGroups).LoadGroups).Start();
           }
 
           private void buttonLikedPages_Click(object sender, EventArgs e)
           {
                Form formLikedPages = FormFactory.CreateFormByType(FormFactory.eFormType.FormLikedPages);
                openChildForm(formLikedPages);
+               new Thread(((FormLikedPages)formLikedPages).LoadLikedPages).Start();
           }
 
           private void buttonFriends_Click(object sender, EventArgs e)
           {
                Form formFriends = FormFactory.CreateFormByType(FormFactory.eFormType.FormFriends);
                openChildForm(formFriends);
+               new Thread(((FormFriends)formFriends).ShowFriendsList).Start();
           }
 
           private void buttonPersonality_Click(object sender, EventArgs e)

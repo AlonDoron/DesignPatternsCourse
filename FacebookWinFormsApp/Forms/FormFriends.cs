@@ -12,12 +12,19 @@ namespace FacebookUI.Forms
           public FormFriends()
           {
                InitializeComponent();
-               showFriendsList();
           }
 
-          private void showFriendsList()
+          public void ShowFriendsList()
           {
-               membersBindingSource.DataSource = FacebookApi.GetFriendsList();
+               try
+               {
+                    this.Invoke(new Action(() => membersBindingSource.DataSource = FacebookApi.GetFriendsList()));
+               }
+               catch (Exception e)
+               {
+                    MessageBox.Show(e.Message);
+                    throw;
+               }
           }
 
           private void listBoxFriends_SelectedIndexChanged(object sender, EventArgs e)

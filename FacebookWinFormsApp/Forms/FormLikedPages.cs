@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using FacebookLogic;
 
 namespace FacebookUI.Forms
@@ -10,12 +11,19 @@ namespace FacebookUI.Forms
           public FormLikedPages()
           {
                InitializeComponent();
-               loadLikedPages();
           }
 
-          private void loadLikedPages()
+          public void LoadLikedPages()
           {
-               pageBindingSource.DataSource = FacebookApi.GetLikedPagesList();
+               try
+               {
+                    this.Invoke(new Action(() => pageBindingSource.DataSource = FacebookApi.GetLikedPagesList()));
+               }
+               catch (Exception e)
+               {
+                    MessageBox.Show(e.Message);
+                    throw;
+               }
           }
      }
 }

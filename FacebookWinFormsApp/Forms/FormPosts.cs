@@ -162,7 +162,7 @@ namespace FacebookUI.Forms
           {
                if (listBoxPosts.SelectedIndex >= 0)
                {
-                    if (m_CurrentSelectedPost.PictureURL != null)
+                    if (m_CurrentSelectedPost?.PictureURL != null)
                     {
                          pictureBoxPostImage.LoadAsync(m_CurrentSelectedPost.PictureURL);
                     }

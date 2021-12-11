@@ -12,12 +12,19 @@ namespace FacebookUI.Forms
           public FormGroups()
           {
                InitializeComponent();
-               loadGroups();
           }
 
-          private void loadGroups()
+          public void LoadGroups()
           {
-               groupBindingSource.DataSource = FacebookApi.GetGroupsList();
+               try
+               {
+                    this.Invoke(new Action(() => groupBindingSource.DataSource = FacebookApi.GetGroupsList()));
+               }
+               catch (Exception e)
+               {
+                    MessageBox.Show(e.Message);
+                    throw;
+               }
           }
      }
 }

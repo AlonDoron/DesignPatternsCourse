@@ -16,6 +16,7 @@ namespace FacebookLogic
 
           #region Caching Proxy Data
 
+          private readonly Dictionary<string, int> m_LikesByCategory;
           private string m_UsernameText;
           private string m_UserImageURL;
           private FacebookObjectCollection<Post> m_PostsList;
@@ -24,8 +25,6 @@ namespace FacebookLogic
           private FacebookObjectCollection<Group> m_GroupsList;
           private FacebookObjectCollection<Page> m_LikedPagesList;
           private FacebookObjectCollection<User> m_FriendsList;
-          private FacebookObjectCollection<Page> m_SameLikedPagesList;
-          private Dictionary<string, int> m_LikesByCategory;
 
           #endregion
 
@@ -50,6 +49,7 @@ namespace FacebookLogic
 
           private FacebookApiFacade()
           {
+               m_LikesByCategory = new Dictionary<string, int>();
           }
 
           public LoginResult Login()
@@ -158,6 +158,7 @@ namespace FacebookLogic
                     {
                          throw new Exception($"We can't show you you {likedPage.Name}'s category type right now.");
                     }
+
                     if (!m_LikesByCategory.ContainsKey(likedPage.Category))
                     {
                          m_LikesByCategory.Add(likedPage.Category, 0);
