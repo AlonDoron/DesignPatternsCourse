@@ -9,10 +9,25 @@ namespace FacebookLogic
      public sealed class FacebookApiFacade
      {
           private const string k_PictureUrlStartString = "https://";
-          private static readonly object sr_InstanceCreate = new object();
+          private static readonly object sr_FacadeCreateLock = new object();
           private static User s_User;
 
           private static FacebookApiFacade s_Instance;
+
+          #region Caching Proxy Data
+
+          private string m_UsernameText;
+          private string m_UserImageURL;
+          private FacebookObjectCollection<Post> m_PostsList;
+          private FacebookObjectCollection<Album> m_AlbumsList;
+          private FacebookObjectCollection<Event> m_EventsList;
+          private FacebookObjectCollection<Group> m_GroupsList;
+          private FacebookObjectCollection<Page> m_LikedPagesList;
+          private FacebookObjectCollection<User> m_FriendsList;
+          private FacebookObjectCollection<Page> m_SameLikedPagesList;
+          private Dictionary<string, int> m_LikesByCategory;
+
+          #endregion
 
           public static FacebookApiFacade Instance
           {
@@ -20,7 +35,7 @@ namespace FacebookLogic
                {
                     if (s_Instance == null)
                     {
-                         lock (sr_InstanceCreate)
+                         lock (sr_FacadeCreateLock)
                          {
                               if (s_Instance == null)
                               {
@@ -64,42 +79,52 @@ namespace FacebookLogic
 
           public string GetUsernameText()
           {
-               return s_User.Name;
+               if (m_UsernameText == string.Empty)
+               {
+                    m_UsernameText = s_User.Name;
+               }
+
+               return m_UsernameText;
           }
 
           public string GetUserImageURL()
           {
-               return s_User.PictureNormalURL;
+               if (string.IsNullOrEmpty(m_UserImageURL))
+               {
+                    m_UserImageURL = s_User.PictureNormalURL;
+               }
+
+               return m_UserImageURL;
           }
 
           public FacebookObjectCollection<Post> GetPostsList()
           {
-               return s_User.Posts;
+               return m_PostsList ?? (m_PostsList = s_User.Posts);
           }
 
           public FacebookObjectCollection<Album> GetAlbumsList()
           {
-               return s_User.Albums;
+               return m_AlbumsList ?? (m_AlbumsList = s_User.Albums);
           }
 
           public FacebookObjectCollection<Event> GetEventsList()
           {
-               return s_User.Events;
+               return m_EventsList ?? (m_EventsList = s_User.Events);
           }
 
           public FacebookObjectCollection<Group> GetGroupsList()
           {
-               return s_User.Groups;
+               return m_GroupsList ?? (m_GroupsList = s_User.Groups);
           }
 
           public FacebookObjectCollection<Page> GetLikedPagesList()
           {
-               return s_User.LikedPages;
+               return m_LikedPagesList ?? (m_LikedPagesList = s_User.LikedPages);
           }
 
           public FacebookObjectCollection<User> GetFriendsList()
           {
-               return s_User.Friends;
+               return m_FriendsList ?? (m_FriendsList = s_User.Friends);
           }
 
           public FacebookObjectCollection<Page> GetSameLikedPagesList(FacebookObjectCollection<Page> i_SelectedFriendLikedPages)
@@ -122,7 +147,10 @@ namespace FacebookLogic
 
           public Dictionary<string, int> GetLikesByCategory()
           {
-               Dictionary<string, int> results = new Dictionary<string, int>();
+               if (m_LikesByCategory.Count != 0)
+               {
+                    return m_LikesByCategory;
+               }
 
                foreach (Page likedPage in GetLikedPagesList())
                {
@@ -130,16 +158,15 @@ namespace FacebookLogic
                     {
                          throw new Exception($"We can't show you you {likedPage.Name}'s category type right now.");
                     }
-
-                    if (!results.ContainsKey(likedPage.Category))
+                    if (!m_LikesByCategory.ContainsKey(likedPage.Category))
                     {
-                         results.Add(likedPage.Category, 0);
+                         m_LikesByCategory.Add(likedPage.Category, 0);
                     }
 
-                    results[likedPage.Category]++;
+                    m_LikesByCategory[likedPage.Category]++;
                }
 
-               return results;
+               return m_LikesByCategory;
           }
 
           public Status PostStatus(string i_Text)
