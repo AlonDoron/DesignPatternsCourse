@@ -1,35 +1,28 @@
 ﻿using System;
 using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormGroups : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormGroups()
           {
                InitializeComponent();
-               loadGroups();
           }
 
-          private void loadGroups()
+          public void LoadGroups()
           {
-               foreach (Group group in FacebookApiHelper.GetGroupsList())
+               try
                {
-                    listBoxGroups.Items.Add(group);
+                    this.Invoke(new Action(() => groupBindingSource.DataSource = FacebookApi.GetGroupsList()));
                }
-
-               if (listBoxGroups.Items.Count == 0)
+               catch (Exception e)
                {
-                    listBoxGroups.Items.Add("You have no groups :(");
-                    this.listBoxGroups.SelectedIndexChanged -= listBoxGroups_SelectedIndexChanged;
+                    MessageBox.Show(e.Message);
+                    throw;
                }
-          }
-
-          private void listBoxGroups_SelectedIndexChanged(object sender, EventArgs e)
-          {
-               Group selectedGroup = listBoxGroups.SelectedItem as Group;
-               pictureBoxGroup.Image = selectedGroup.ImageNormal;
           }
      }
 }

@@ -5,12 +5,14 @@ using System.Linq;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPosts : Form
      {
           public List<PostObject> m_FavoritePosts;
           private Post m_CurrentSelectedPost;
+
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
           public FormPosts()
           {
@@ -21,14 +23,14 @@ namespace BasicFacebookFeatures.Forms
 
           private void loadFavoritesPosts()
           {
-               m_FavoritePosts = FilesHelper.GetFavoritePosts();
+               m_FavoritePosts = FilesHandler.GetFavoritePosts();
           }
 
           private void loadPostsList()
           {
                listBoxPosts.Items.Clear();
 
-               foreach (Post post in FacebookApiHelper.GetPostsList())
+               foreach (Post post in FacebookApi.GetPostsList())
                {
                     if (post.Message != null)
                     {
@@ -57,7 +59,7 @@ namespace BasicFacebookFeatures.Forms
           {
                try
                {
-                    Status postedStatus = FacebookApiHelper.PostStatus(textBoxStatus.Text);
+                    Status postedStatus = FacebookApi.PostStatus(textBoxStatus.Text);
                     MessageBox.Show("Status Posted! ID: " + postedStatus.Id);
                }
                catch (Exception ex)
@@ -76,7 +78,7 @@ namespace BasicFacebookFeatures.Forms
                if (listBoxPosts.SelectedIndex >= 0)
                {
                     string selectedText = listBoxPosts.SelectedItem.ToString();
-                    m_CurrentSelectedPost = FacebookApiHelper.GetPostByText(selectedText);
+                    m_CurrentSelectedPost = FacebookApi.GetPostByText(selectedText);
 
                     if (i_E.Button == MouseButtons.Right && listBoxPosts.SelectedIndex >= 0)
                     {
@@ -117,7 +119,7 @@ namespace BasicFacebookFeatures.Forms
                     break;
                }
 
-               FilesHelper.WritePostsListToFile(m_FavoritePosts);
+               FilesHandler.WritePostsListToFile(m_FavoritePosts);
                updateListBoxPosts();
 
                resetSelectedPost();
@@ -151,7 +153,7 @@ namespace BasicFacebookFeatures.Forms
                     m_CurrentSelectedPost.Link);
 
                m_FavoritePosts.Add(p);
-               FilesHelper.WritePostsListToFile(m_FavoritePosts);
+               FilesHandler.WritePostsListToFile(m_FavoritePosts);
                resetSelectedPost();
           }
 
@@ -159,7 +161,7 @@ namespace BasicFacebookFeatures.Forms
           {
                if (listBoxPosts.SelectedIndex >= 0)
                {
-                    if (m_CurrentSelectedPost.PictureURL != null)
+                    if (m_CurrentSelectedPost?.PictureURL != null)
                     {
                          pictureBoxPostImage.LoadAsync(m_CurrentSelectedPost.PictureURL);
                     }
@@ -185,7 +187,7 @@ namespace BasicFacebookFeatures.Forms
                {
                     foreach (PostObject favoritePost in m_FavoritePosts)
                     {
-                         foreach (Post postFromUserData in FacebookApiHelper.GetPostsList())
+                         foreach (Post postFromUserData in FacebookApi.GetPostsList())
                          {
                               if (favoritePost.m_CreatedTime == postFromUserData.CreatedTime)
                               {
@@ -194,11 +196,9 @@ namespace BasicFacebookFeatures.Forms
                          }
                     }
                }
-
-               // If we de-selected "Show Favorite Posts"
                else
                {
-                    loadPostsList();
+                    loadPostsList(); // If we de-selected "Show Favorite Posts"
                }
           }
      }

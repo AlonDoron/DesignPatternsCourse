@@ -1,36 +1,28 @@
 ﻿using System;
 using System.Windows.Forms;
-using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormLikedPages : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormLikedPages()
           {
                InitializeComponent();
-               loadLikedPages();
           }
 
-          private void loadLikedPages()
+          public void LoadLikedPages()
           {
-               foreach (Page likedPage in FacebookApiHelper.GetLikedPagesList())
+               try
                {
-                    listBoxLikedPages.Items.Add(likedPage);
+                    this.Invoke(new Action(() => pageBindingSource.DataSource = FacebookApi.GetLikedPagesList()));
                }
-          }
-
-          private void listBoxLikedPages_SelectedIndexChanged(object sender, EventArgs e)
-          {
-               if (listBoxLikedPages.SelectedItem is Page selectedPage)
+               catch (Exception e)
                {
-                    displayPageAbout(selectedPage);
+                    MessageBox.Show(e.Message);
+                    throw;
                }
-          }
-
-          private void displayPageAbout(Page i_SelectedPage)
-          {
-               richTextBoxPageDetails.Text = i_SelectedPage.Description;
           }
      }
 }

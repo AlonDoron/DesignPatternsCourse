@@ -2,21 +2,27 @@
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormFriends : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormFriends()
           {
                InitializeComponent();
-               showFriendsList();
           }
 
-          private void showFriendsList()
+          public void ShowFriendsList()
           {
-               foreach (User friend in FacebookApiHelper.GetFriendsList())
+               try
                {
-                    listBoxFriends.Items.Add(friend);
+                    this.Invoke(new Action(() => membersBindingSource.DataSource = FacebookApi.GetFriendsList()));
+               }
+               catch (Exception e)
+               {
+                    MessageBox.Show(e.Message);
+                    throw;
                }
           }
 
@@ -38,7 +44,7 @@ namespace BasicFacebookFeatures.Forms
           {
                listBoxCommonLikedPages.Items.Clear();
 
-               foreach (Page page in FacebookApiHelper.GetSameLikedPagesList(i_SelectedFriend.LikedPages))
+               foreach (Page page in FacebookApi.GetSameLikedPagesList(i_SelectedFriend.LikedPages))
                {
                     listBoxCommonLikedPages.Items.Add(page);
                }
@@ -47,11 +53,7 @@ namespace BasicFacebookFeatures.Forms
           private void displayFriendData(User i_SelectedFriend)
           {
                pictureBoxFriendPicture.Image = i_SelectedFriend.ImageNormal;
-               richTextBoxFriendDetails.Text = $@"Name: {i_SelectedFriend.Name}
-Birth Day: {i_SelectedFriend.Birthday}
-Gender: {i_SelectedFriend.Gender}
-Latest Post: 
-{i_SelectedFriend.Posts[0].Description}";
+               richTextBoxFriendDetails.Text = i_SelectedFriend.Posts[0].Description;
           }
 
           private void listBoxCommonLikedPages_SelectedIndexChanged(object sender, EventArgs e)

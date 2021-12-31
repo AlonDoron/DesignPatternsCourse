@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using BasicFacebookFeatures.Forms;
+using FacebookWinFormsApp.Forms;
 using Newtonsoft.Json;
 
-namespace BasicFacebookFeatures
+namespace FacebookWinFormsApp
 {
-     public static class FilesHelper
+     public static class FilesHandler
      {
           private const string k_FavoritesFile = "C:/temp/favorites.json";
 

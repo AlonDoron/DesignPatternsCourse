@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
-using BasicFacebookFeatures.Forms;
-using FacebookWrapper.ObjectModel;
+using FacebookWinFormsApp.Forms;
 using FacebookWrapper;
 
-namespace BasicFacebookFeatures
+namespace FacebookWinFormsApp
 {
      public partial class FormMain : Form
      {
           private Form m_ActiveForm;
+
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
           public FormMain()
           {
@@ -21,30 +22,15 @@ namespace BasicFacebookFeatures
           {
                Clipboard.SetText("alon121211@gmail.com");
 
-               LoginResult loginResult = FacebookService.Login(
-                    "2016566511844897",
-                    "email",
-                    "public_profile",
-                    "user_age_range",
-                    "user_birthday",
-                    "user_events",
-                    "user_friends",
-                    "user_gender",
-                    "user_hometown",
-                    "user_likes",
-                    "user_link",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_videos");
+               LoginResult loginResult = FacebookApi.Login();
 
                if (!string.IsNullOrEmpty(loginResult.AccessToken))
                {
-                    FacebookApiHelper.SetUser(loginResult.LoggedInUser);
+                    FacebookApi.SetUser(loginResult.LoggedInUser);
 
-                    setUserImage(FacebookApiHelper.GetUserImageURL());
+                    setUserImage(FacebookApi.GetUserImageURL());
 
-                    labelUsername.Text = FacebookApiHelper.GetUsernameText();
+                    labelUsername.Text = FacebookApi.GetUsernameText();
 
                     panelSidebar.Show();
                     buttonLogin.Hide();
@@ -66,7 +52,7 @@ namespace BasicFacebookFeatures
                this.Close();
           }
 
-          private void openChildForm(Form i_childForm, object sender)
+          private void openChildForm(Form i_childForm)
           {
                m_ActiveForm?.Close();
 
@@ -84,37 +70,48 @@ namespace BasicFacebookFeatures
 
           private void buttonPosts_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormPosts(), sender);
+               Form formPosts = FormFactory.CreateFormByType(FormFactory.eFormType.FormPosts);
+               openChildForm(formPosts);
           }
 
           private void buttonGallery_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormGallery(), sender);
+               Form formGallery = FormFactory.CreateFormByType(FormFactory.eFormType.FormGallery);
+               openChildForm(formGallery);
           }
 
           private void buttonEvents_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormEvents(), sender);
+               Form formEvents = FormFactory.CreateFormByType(FormFactory.eFormType.FormEvents);
+               openChildForm(formEvents);
+               new Thread(((FormEvents)formEvents).FetchEvents).Start();
           }
 
           private void buttonGroups_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormGroups(), sender);
+               Form formGroups = FormFactory.CreateFormByType(FormFactory.eFormType.FormGroups);
+               openChildForm(formGroups);
+               new Thread(((FormGroups)formGroups).LoadGroups).Start();
           }
 
           private void buttonLikedPages_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormLikedPages(), sender);
+               Form formLikedPages = FormFactory.CreateFormByType(FormFactory.eFormType.FormLikedPages);
+               openChildForm(formLikedPages);
+               new Thread(((FormLikedPages)formLikedPages).LoadLikedPages).Start();
           }
 
           private void buttonFriends_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormFriends(), sender);
+               Form formFriends = FormFactory.CreateFormByType(FormFactory.eFormType.FormFriends);
+               openChildForm(formFriends);
+               new Thread(((FormFriends)formFriends).ShowFriendsList).Start();
           }
 
           private void buttonPersonality_Click(object sender, EventArgs e)
           {
-               openChildForm(new FormPersonalityStatistics(), sender);
+               Form formPersonalityStatistics = FormFactory.CreateFormByType(FormFactory.eFormType.FormPersonalityStatistics);
+               openChildForm(formPersonalityStatistics);
           }
      }
 }

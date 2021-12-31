@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPersonalityStatistics : Form
      {
           private Dictionary<string, string> m_UserStatistics;
+
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
           public FormPersonalityStatistics()
           {
@@ -19,19 +21,19 @@ namespace BasicFacebookFeatures.Forms
                m_UserStatistics = new Dictionary<string, string>
                     {
                          {
-                         "posts", FacebookApiHelper.GetPostsList().Count.ToString()
+                         "posts", FacebookApi.GetPostsList().Count.ToString()
                          },
                          {
-                         "friends", FacebookApiHelper.GetFriendsList().Count.ToString()
+                         "friends", FacebookApi.GetFriendsList().Count.ToString()
                          },
                          {
-                         "events", FacebookApiHelper.GetEventsList().Count.ToString()
+                         "events", FacebookApi.GetEventsList().Count.ToString()
                          },
                          {
-                         "groups", FacebookApiHelper.GetGroupsList().Count.ToString()
+                         "groups", FacebookApi.GetGroupsList().Count.ToString()
                          },
                          {
-                         "likedPages", FacebookApiHelper.GetLikedPagesList().Count.ToString()
+                         "likedPages", FacebookApi.GetLikedPagesList().Count.ToString()
                     }
                     };
 
@@ -47,8 +49,8 @@ namespace BasicFacebookFeatures.Forms
           {
                try
                {
-                    Dictionary<string, int> likesByCategory = FacebookApiHelper.GetLikesByCategory();
-                    setStatisticsText(likesByCategory, FacebookApiHelper.GetLikedPagesList().Count);
+                    Dictionary<string, int> likesByCategory = FacebookApi.GetLikesByCategory();
+                    setStatisticsText(likesByCategory, FacebookApi.GetLikedPagesList().Count);
                }
                catch (Exception e)
                {

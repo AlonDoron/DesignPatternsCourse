@@ -2,38 +2,36 @@
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormEvents : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormEvents()
           {
                InitializeComponent();
-               fetchEvents();
           }
 
-          private void fetchEvents()
+          public void FetchEvents()
           {
-               listBoxEvents.Items.Clear();
-               listBoxEvents.DisplayMember = "Name";
-               
-               foreach (Event fbEvent in FacebookApiHelper.GetEventsList())
+               try
                {
-                    listBoxEvents.Items.Add(fbEvent);
+                    this.Invoke(new Action(() => eventBindingSource.DataSource = FacebookApi.GetEventsList()));
                }
-
-               if (listBoxEvents.Items.Count == 0)
+               catch (Exception e)
                {
-                    MessageBox.Show("No Events to retrieve :(");
+                    MessageBox.Show(e.Message);
+                    throw;
                }
           }
 
           private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
           {
-               Event selectedEvent = listBoxEvents.SelectedItem as Event;
-               loadEventImage(selectedEvent);
-               markDate(selectedEvent);
-               monthCalendarEvents.Show();
+               if (listBoxEvents.SelectedItem is Event selectedEvent)
+               {
+                    loadEventImage(selectedEvent);
+               }
           }
 
           private void loadEventImage(Event i_SelectedEvent)
@@ -41,17 +39,6 @@ namespace BasicFacebookFeatures.Forms
                if (listBoxEvents.SelectedItems.Count == 1)
                {
                     pictureBoxEvents.LoadAsync(i_SelectedEvent.Cover.SourceURL);
-               }
-          }
-
-          private void markDate(Event i_SelectedEvent)
-          {
-               if (i_SelectedEvent.StartTime != null)
-               {
-                    monthCalendarEvents.BoldedDates = new DateTime[]
-                    {
-                         (DateTime)i_SelectedEvent.StartTime
-                    };
                }
           }
      }

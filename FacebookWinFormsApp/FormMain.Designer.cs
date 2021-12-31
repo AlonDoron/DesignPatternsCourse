@@ -1,4 +1,4 @@
-﻿namespace BasicFacebookFeatures
+﻿namespace FacebookWinFormsApp
 {
      public partial class FormMain
      {
@@ -32,6 +32,8 @@
                this.buttonLogin = new System.Windows.Forms.Button();
                this.buttonLogout = new System.Windows.Forms.Button();
                this.panelSidebar = new System.Windows.Forms.Panel();
+               this.buttonGroups = new System.Windows.Forms.Button();
+               this.buttonPersonality = new System.Windows.Forms.Button();
                this.buttonLikedPages = new System.Windows.Forms.Button();
                this.buttonEvents = new System.Windows.Forms.Button();
                this.buttonFriends = new System.Windows.Forms.Button();
@@ -43,8 +45,6 @@
                this.panelTitleBar = new System.Windows.Forms.Panel();
                this.labelTitle = new System.Windows.Forms.Label();
                this.panelForms = new System.Windows.Forms.Panel();
-               this.buttonPersonality = new System.Windows.Forms.Button();
-               this.buttonGroups = new System.Windows.Forms.Button();
                this.panelSidebar.SuspendLayout();
                this.panel5.SuspendLayout();
                ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -93,6 +93,36 @@
                this.panelSidebar.Size = new System.Drawing.Size(186, 538);
                this.panelSidebar.TabIndex = 53;
                this.panelSidebar.Visible = false;
+               // 
+               // buttonGroups
+               // 
+               this.buttonGroups.Dock = System.Windows.Forms.DockStyle.Top;
+               this.buttonGroups.FlatAppearance.BorderSize = 0;
+               this.buttonGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+               this.buttonGroups.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+               this.buttonGroups.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(165)))), ((int)(((byte)(122)))));
+               this.buttonGroups.Location = new System.Drawing.Point(0, 417);
+               this.buttonGroups.Name = "buttonGroups";
+               this.buttonGroups.Size = new System.Drawing.Size(186, 42);
+               this.buttonGroups.TabIndex = 9;
+               this.buttonGroups.Text = "Groups";
+               this.buttonGroups.UseVisualStyleBackColor = true;
+               this.buttonGroups.Click += new System.EventHandler(this.buttonGroups_Click);
+               // 
+               // buttonPersonality
+               // 
+               this.buttonPersonality.Dock = System.Windows.Forms.DockStyle.Top;
+               this.buttonPersonality.FlatAppearance.BorderSize = 0;
+               this.buttonPersonality.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+               this.buttonPersonality.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+               this.buttonPersonality.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(165)))), ((int)(((byte)(122)))));
+               this.buttonPersonality.Location = new System.Drawing.Point(0, 375);
+               this.buttonPersonality.Name = "buttonPersonality";
+               this.buttonPersonality.Size = new System.Drawing.Size(186, 42);
+               this.buttonPersonality.TabIndex = 8;
+               this.buttonPersonality.Text = "Personality";
+               this.buttonPersonality.UseVisualStyleBackColor = true;
+               this.buttonPersonality.Click += new System.EventHandler(this.buttonPersonality_Click);
                // 
                // buttonLikedPages
                // 
@@ -231,36 +261,6 @@
                this.panelForms.Name = "panelForms";
                this.panelForms.Size = new System.Drawing.Size(749, 458);
                this.panelForms.TabIndex = 55;
-               // 
-               // buttonPersonality
-               // 
-               this.buttonPersonality.Dock = System.Windows.Forms.DockStyle.Top;
-               this.buttonPersonality.FlatAppearance.BorderSize = 0;
-               this.buttonPersonality.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-               this.buttonPersonality.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-               this.buttonPersonality.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(165)))), ((int)(((byte)(122)))));
-               this.buttonPersonality.Location = new System.Drawing.Point(0, 375);
-               this.buttonPersonality.Name = "buttonPersonality";
-               this.buttonPersonality.Size = new System.Drawing.Size(186, 42);
-               this.buttonPersonality.TabIndex = 8;
-               this.buttonPersonality.Text = "Personality";
-               this.buttonPersonality.UseVisualStyleBackColor = true;
-               this.buttonPersonality.Click += new System.EventHandler(this.buttonPersonality_Click);
-               // 
-               // buttonGroups
-               // 
-               this.buttonGroups.Dock = System.Windows.Forms.DockStyle.Top;
-               this.buttonGroups.FlatAppearance.BorderSize = 0;
-               this.buttonGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-               this.buttonGroups.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-               this.buttonGroups.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(165)))), ((int)(((byte)(122)))));
-               this.buttonGroups.Location = new System.Drawing.Point(0, 417);
-               this.buttonGroups.Name = "buttonGroups";
-               this.buttonGroups.Size = new System.Drawing.Size(186, 42);
-               this.buttonGroups.TabIndex = 9;
-               this.buttonGroups.Text = "Groups";
-               this.buttonGroups.UseVisualStyleBackColor = true;
-               this.buttonGroups.Click += new System.EventHandler(this.buttonGroups_Click);
                // 
                // FormMain
                // 

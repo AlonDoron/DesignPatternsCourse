@@ -2,10 +2,12 @@
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
-namespace BasicFacebookFeatures.Forms
+namespace FacebookWinFormsApp.Forms
 {
      public partial class FormGallery : Form
      {
+          private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
+
           public FormGallery()
           {
                InitializeComponent();
@@ -15,7 +17,7 @@ namespace BasicFacebookFeatures.Forms
           {
                listBoxPhotos.Items.Clear();
 
-               foreach (Album album in FacebookApiHelper.GetAlbumsList())
+               foreach (Album album in FacebookApi.GetAlbumsList())
                {
                     listBoxPhotos.Items.Add(album);
                }
@@ -30,7 +32,7 @@ namespace BasicFacebookFeatures.Forms
           {
                listBoxPhotos.Items.Clear();
 
-               foreach (Album album in FacebookApiHelper.GetAlbumsList())
+               foreach (Album album in FacebookApi.GetAlbumsList())
                {
                     foreach (Photo albumPhoto in album.Photos)
                     {
