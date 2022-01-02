@@ -108,7 +108,7 @@
                this.richTextBoxFriendDetails.Name = "richTextBoxFriendDetails";
                this.richTextBoxFriendDetails.Size = new System.Drawing.Size(187, 139);
                this.richTextBoxFriendDetails.TabIndex = 2;
-               this.richTextBoxFriendDetails.Text = "";
+               this.richTextBoxFriendDetails.Text = string.Empty;
                // 
                // listBoxCommonLikedPages
                // 
