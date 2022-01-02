@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection.cs" />
     <Compile Include="FacebookApiFacade.cs" />
     <Compile Include="FilesHandler.cs" />
     <Compile Include="FormFactory.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
@@ -10,13 +11,12 @@ namespace FacebookWinFormsApp
      {
           private const string k_PictureUrlStartString = "https://";
           private static readonly object sr_FacadeCreateLock = new object();
-          private static User s_User;
 
           private static FacebookApiFacade s_Instance;
 
           #region Caching Proxy Data
 
-          private readonly Dictionary<string, int> m_LikesByCategory;
+          private Dictionary<string, int> m_LikesByCategory;
           private string m_UsernameText;
           private string m_UserImageURL;
           private FacebookObjectCollection<Post> m_PostsList;
@@ -50,31 +50,20 @@ namespace FacebookWinFormsApp
           private FacebookApiFacade()
           {
                m_LikesByCategory = new Dictionary<string, int>();
+               Connection.LoginDetected += resetFacade;
           }
 
-          public LoginResult Login()
+          private void resetFacade()
           {
-               return FacebookService.Login(
-                    "2016566511844897",
-                    "email",
-                    "public_profile",
-                    "user_age_range",
-                    "user_birthday",
-                    "user_events",
-                    "user_friends",
-                    "user_gender",
-                    "user_hometown",
-                    "user_likes",
-                    "user_link",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_videos");
-          }
-
-          public void SetUser(User i_User)
-          {
-               s_User = i_User;
+               m_UsernameText = string.Empty;
+               m_UserImageURL = string.Empty;
+               m_LikesByCategory = new Dictionary<string, int>();
+               m_PostsList = new FacebookObjectCollection<Post>();
+               m_AlbumsList = new FacebookObjectCollection<Album>();
+               m_EventsList = new FacebookObjectCollection<Event>();
+               m_GroupsList = new FacebookObjectCollection<Group>();
+               m_LikedPagesList = new FacebookObjectCollection<Page>();
+               m_FriendsList = new FacebookObjectCollection<User>();
           }
 
           public string GetUsernameText()

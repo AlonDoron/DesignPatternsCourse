@@ -49,7 +49,6 @@ namespace FacebookWinFormsApp
           private void buttonLogout_Click(object sender, EventArgs e)
           {
                FacebookService.LogoutWithUI();
-               this.Close();
           }
 
           private void openChildForm(Form i_childForm)
