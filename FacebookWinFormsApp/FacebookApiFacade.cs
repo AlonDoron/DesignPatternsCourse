@@ -50,7 +50,7 @@ namespace FacebookWinFormsApp
           private FacebookApiFacade()
           {
                m_LikesByCategory = new Dictionary<string, int>();
-               Connection.LoginDetected += resetFacade;
+               Connection.LogoutDetected += resetFacade;
           }
 
           private void resetFacade()

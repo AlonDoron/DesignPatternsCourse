@@ -21,9 +21,10 @@ namespace FacebookWinFormsApp
 
           private void resetContent()
           {
+               m_ActiveForm.Hide();
+               m_ActiveForm = null;
                panelSidebar.Hide();
                buttonLogin.Show();
-               m_ActiveForm = null;
           }
 
           private void buttonLogin_Click(object sender, EventArgs e)

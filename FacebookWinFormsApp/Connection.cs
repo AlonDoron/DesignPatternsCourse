@@ -8,8 +8,6 @@ namespace FacebookWinFormsApp
      {
           public static User User { get; private set; }
 
-          public static event Action LoginDetected;
-
           public static event Action LogoutDetected;
 
           private const string k_FacebookAppId = "2016566511844897";
@@ -34,8 +32,6 @@ namespace FacebookWinFormsApp
                     "user_videos");
 
                User = loginResult.LoggedInUser;
-
-               LoginDetected?.Invoke();
           }
 
           public static bool IsLoggedIn()
