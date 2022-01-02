@@ -22,12 +22,10 @@ namespace FacebookWinFormsApp
           {
                Clipboard.SetText("alon121211@gmail.com");
 
-               LoginResult loginResult = FacebookApi.Login();
+               Connection.Login();
 
-               if (!string.IsNullOrEmpty(loginResult.AccessToken))
+               if (Connection.User != null)
                {
-                    FacebookApi.SetUser(loginResult.LoggedInUser);
-
                     setUserImage(FacebookApi.GetUserImageURL());
 
                     labelUsername.Text = FacebookApi.GetUsernameText();
@@ -37,7 +35,7 @@ namespace FacebookWinFormsApp
                }
                else
                {
-                    MessageBox.Show(loginResult.ErrorMessage, "Login Failed");
+                    MessageBox.Show("Failed to connect with selected user.", "Login Failed");
                }
           }
 
