@@ -19,6 +19,16 @@ namespace FacebookWinFormsApp.Forms
                loadFavoritesPosts();
                InitializeComponent();
                loadPostsList();
+
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               m_CurrentSelectedPost = null;
+               m_FavoritePosts = null;
+               listBoxPosts.Items.Clear();
+               pictureBoxPostImage.Image = null;
           }
 
           private void loadFavoritesPosts()

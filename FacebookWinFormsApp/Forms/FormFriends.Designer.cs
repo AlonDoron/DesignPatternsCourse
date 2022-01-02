@@ -34,22 +34,49 @@
                System.Windows.Forms.Label lastNameLabel;
                System.Windows.Forms.Label firstNameLabel;
                this.listBoxFriends = new System.Windows.Forms.ListBox();
+               this.membersBindingSource = new System.Windows.Forms.BindingSource(this.components);
                this.pictureBoxFriendPicture = new System.Windows.Forms.PictureBox();
                this.richTextBoxFriendDetails = new System.Windows.Forms.RichTextBox();
                this.listBoxCommonLikedPages = new System.Windows.Forms.ListBox();
                this.label1 = new System.Windows.Forms.Label();
                this.label2 = new System.Windows.Forms.Label();
                this.label3 = new System.Windows.Forms.Label();
-               this.membersBindingSource = new System.Windows.Forms.BindingSource(this.components);
                this.birthdayTextBox = new System.Windows.Forms.TextBox();
                this.lastNameTextBox = new System.Windows.Forms.TextBox();
                this.firstNameTextBox = new System.Windows.Forms.TextBox();
                birthdayLabel = new System.Windows.Forms.Label();
                lastNameLabel = new System.Windows.Forms.Label();
                firstNameLabel = new System.Windows.Forms.Label();
-               ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendPicture)).BeginInit();
                ((System.ComponentModel.ISupportInitialize)(this.membersBindingSource)).BeginInit();
+               ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendPicture)).BeginInit();
                this.SuspendLayout();
+               // 
+               // birthdayLabel
+               // 
+               birthdayLabel.AutoSize = true;
+               birthdayLabel.Location = new System.Drawing.Point(505, 225);
+               birthdayLabel.Name = "birthdayLabel";
+               birthdayLabel.Size = new System.Drawing.Size(48, 13);
+               birthdayLabel.TabIndex = 2;
+               birthdayLabel.Text = "Birthday:";
+               // 
+               // lastNameLabel
+               // 
+               lastNameLabel.AutoSize = true;
+               lastNameLabel.Location = new System.Drawing.Point(505, 199);
+               lastNameLabel.Name = "lastNameLabel";
+               lastNameLabel.Size = new System.Drawing.Size(61, 13);
+               lastNameLabel.TabIndex = 10;
+               lastNameLabel.Text = "Last Name:";
+               // 
+               // firstNameLabel
+               // 
+               firstNameLabel.AutoSize = true;
+               firstNameLabel.Location = new System.Drawing.Point(505, 173);
+               firstNameLabel.Name = "firstNameLabel";
+               firstNameLabel.Size = new System.Drawing.Size(60, 13);
+               firstNameLabel.TabIndex = 6;
+               firstNameLabel.Text = "First Name:";
                // 
                // listBoxFriends
                // 
@@ -61,6 +88,10 @@
                this.listBoxFriends.Size = new System.Drawing.Size(468, 251);
                this.listBoxFriends.TabIndex = 0;
                this.listBoxFriends.SelectedIndexChanged += new System.EventHandler(this.listBoxFriends_SelectedIndexChanged);
+               // 
+               // membersBindingSource
+               // 
+               this.membersBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
                // 
                // pictureBoxFriendPicture
                // 
@@ -77,7 +108,7 @@
                this.richTextBoxFriendDetails.Name = "richTextBoxFriendDetails";
                this.richTextBoxFriendDetails.Size = new System.Drawing.Size(187, 139);
                this.richTextBoxFriendDetails.TabIndex = 2;
-               this.richTextBoxFriendDetails.Text = string.Empty;
+               this.richTextBoxFriendDetails.Text = "";
                // 
                // listBoxCommonLikedPages
                // 
@@ -115,19 +146,6 @@
                this.label3.TabIndex = 6;
                this.label3.Text = "(Press on a page to open it in your browser)";
                // 
-               // membersBindingSource
-               // 
-               this.membersBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
-               // 
-               // birthdayLabel
-               // 
-               birthdayLabel.AutoSize = true;
-               birthdayLabel.Location = new System.Drawing.Point(505, 225);
-               birthdayLabel.Name = "birthdayLabel";
-               birthdayLabel.Size = new System.Drawing.Size(48, 13);
-               birthdayLabel.TabIndex = 2;
-               birthdayLabel.Text = "Birthday:";
-               // 
                // birthdayTextBox
                // 
                this.birthdayTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.membersBindingSource, "Birthday", true));
@@ -144,15 +162,6 @@
                this.lastNameTextBox.Size = new System.Drawing.Size(100, 20);
                this.lastNameTextBox.TabIndex = 11;
                // 
-               // lastNameLabel
-               // 
-               lastNameLabel.AutoSize = true;
-               lastNameLabel.Location = new System.Drawing.Point(505, 199);
-               lastNameLabel.Name = "lastNameLabel";
-               lastNameLabel.Size = new System.Drawing.Size(61, 13);
-               lastNameLabel.TabIndex = 10;
-               lastNameLabel.Text = "Last Name:";
-               // 
                // firstNameTextBox
                // 
                this.firstNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.membersBindingSource, "FirstName", true));
@@ -160,15 +169,6 @@
                this.firstNameTextBox.Name = "firstNameTextBox";
                this.firstNameTextBox.Size = new System.Drawing.Size(100, 20);
                this.firstNameTextBox.TabIndex = 7;
-               // 
-               // firstNameLabel
-               // 
-               firstNameLabel.AutoSize = true;
-               firstNameLabel.Location = new System.Drawing.Point(505, 173);
-               firstNameLabel.Name = "firstNameLabel";
-               firstNameLabel.Size = new System.Drawing.Size(60, 13);
-               firstNameLabel.TabIndex = 6;
-               firstNameLabel.Text = "First Name:";
                // 
                // FormFriends
                // 
@@ -191,8 +191,8 @@
                this.Controls.Add(this.listBoxFriends);
                this.Name = "FormFriends";
                this.Text = "Friends";
-               ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendPicture)).EndInit();
                ((System.ComponentModel.ISupportInitialize)(this.membersBindingSource)).EndInit();
+               ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendPicture)).EndInit();
                this.ResumeLayout(false);
                this.PerformLayout();
 

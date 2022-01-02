@@ -16,6 +16,14 @@ namespace FacebookWinFormsApp
           {
                InitializeComponent();
                FacebookService.s_CollectionLimit = 100;
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               panelSidebar.Hide();
+               buttonLogin.Show();
+               m_ActiveForm = null;
           }
 
           private void buttonLogin_Click(object sender, EventArgs e)

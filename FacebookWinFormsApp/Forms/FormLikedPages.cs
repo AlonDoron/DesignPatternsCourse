@@ -10,6 +10,15 @@ namespace FacebookWinFormsApp.Forms
           public FormLikedPages()
           {
                InitializeComponent();
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               listBoxLikedPages.Text = string.Empty;
+               nameTextBox.Text = string.Empty;
+               descriptionRichTextBox.Text = string.Empty;
+               imageNormalPictureBox.Image = null;
           }
 
           public void LoadLikedPages()

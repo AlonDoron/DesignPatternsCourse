@@ -11,6 +11,7 @@ namespace FacebookWinFormsApp.Forms
           public FormFriends()
           {
                InitializeComponent();
+               Connection.LogoutDetected += InitializeComponent;
           }
 
           public void ShowFriendsList()

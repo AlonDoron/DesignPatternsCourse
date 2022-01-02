@@ -14,6 +14,18 @@ namespace FacebookWinFormsApp.Forms
           {
                InitializeComponent();
                initializeStatistics();
+
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               richTextBoxStatistics.Text = string.Empty;
+               textBoxNumberOfPosts.Text = string.Empty;
+               textBoxNumberOfFriends.Text = string.Empty;
+               textBoxNumberOfEvents.Text = string.Empty;
+               textBoxNumberOfGroups.Text = string.Empty;
+               textBoxNumberOfLikedPages.Text = string.Empty;
           }
 
           private void initializeStatistics()

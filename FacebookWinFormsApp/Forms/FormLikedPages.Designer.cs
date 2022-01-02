@@ -76,7 +76,6 @@ namespace FacebookWinFormsApp.Forms
                // listBoxLikedPages
                // 
                this.listBoxLikedPages.DataSource = this.pageBindingSource;
-               this.listBoxLikedPages.DisplayMember = "Name";
                this.listBoxLikedPages.FormattingEnabled = true;
                this.listBoxLikedPages.Location = new System.Drawing.Point(36, 48);
                this.listBoxLikedPages.Name = "listBoxLikedPages";
@@ -94,7 +93,7 @@ namespace FacebookWinFormsApp.Forms
                this.descriptionRichTextBox.Name = "descriptionRichTextBox";
                this.descriptionRichTextBox.Size = new System.Drawing.Size(289, 365);
                this.descriptionRichTextBox.TabIndex = 10;
-               this.descriptionRichTextBox.Text = string.Empty;
+               this.descriptionRichTextBox.Text = "";
                // 
                // imageNormalPictureBox
                // 

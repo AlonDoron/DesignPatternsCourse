@@ -11,6 +11,13 @@ namespace FacebookWinFormsApp.Forms
           public FormGallery()
           {
                InitializeComponent();
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               listBoxPhotos = new ListBox();
+               pictureBoxAlbum = new PictureBox();
           }
 
           private void loadAlbumsList()

@@ -10,6 +10,15 @@ namespace FacebookWinFormsApp.Forms
           public FormGroups()
           {
                InitializeComponent();
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               listBoxGroups = new ListBox();
+               descriptionRichTextBox.Text = string.Empty;
+               nameTextBox.Text = string.Empty;
+               imageNormalPictureBox.Image = null;
           }
 
           public void LoadGroups()

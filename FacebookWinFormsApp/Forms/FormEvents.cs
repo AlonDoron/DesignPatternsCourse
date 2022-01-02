@@ -11,6 +11,13 @@ namespace FacebookWinFormsApp.Forms
           public FormEvents()
           {
                InitializeComponent();
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               listBoxEvents = new ListBox();
+               pictureBoxEvents = new PictureBox();
           }
 
           public void FetchEvents()
