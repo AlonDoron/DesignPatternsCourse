@@ -57,20 +57,20 @@ namespace FacebookWinFormsApp
           {
                m_UsernameText = string.Empty;
                m_UserImageURL = string.Empty;
-               m_LikesByCategory = new Dictionary<string, int>();
-               m_PostsList = new FacebookObjectCollection<Post>();
-               m_AlbumsList = new FacebookObjectCollection<Album>();
-               m_EventsList = new FacebookObjectCollection<Event>();
-               m_GroupsList = new FacebookObjectCollection<Group>();
-               m_LikedPagesList = new FacebookObjectCollection<Page>();
-               m_FriendsList = new FacebookObjectCollection<User>();
+               m_LikesByCategory = null;
+               m_PostsList = null;
+               m_AlbumsList = null;
+               m_EventsList = null;
+               m_GroupsList = null;
+               m_LikedPagesList = null;
+               m_FriendsList = null;
           }
 
           public string GetUsernameText()
           {
-               if (m_UsernameText == string.Empty)
+               if (Connection.IsLoggedIn() && m_UsernameText == string.Empty)
                {
-                    m_UsernameText = s_User.Name;
+                    m_UsernameText = Connection.User.Name;
                }
 
                return m_UsernameText;
@@ -78,9 +78,9 @@ namespace FacebookWinFormsApp
 
           public string GetUserImageURL()
           {
-               if (string.IsNullOrEmpty(m_UserImageURL))
+               if (Connection.IsLoggedIn() && string.IsNullOrEmpty(m_UserImageURL))
                {
-                    m_UserImageURL = s_User.PictureNormalURL;
+                    m_UserImageURL = Connection.User.PictureNormalURL;
                }
 
                return m_UserImageURL;
@@ -88,39 +88,73 @@ namespace FacebookWinFormsApp
 
           public FacebookObjectCollection<Post> GetPostsList()
           {
-               return m_PostsList ?? (m_PostsList = s_User.Posts);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_PostsList ?? (m_PostsList = Connection.User.Posts);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Album> GetAlbumsList()
           {
-               return m_AlbumsList ?? (m_AlbumsList = s_User.Albums);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_AlbumsList ?? (m_AlbumsList = Connection.User.Albums);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Event> GetEventsList()
           {
-               return m_EventsList ?? (m_EventsList = s_User.Events);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_EventsList ?? (m_EventsList = Connection.User.Events);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Group> GetGroupsList()
           {
-               return m_GroupsList ?? (m_GroupsList = s_User.Groups);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_GroupsList ?? (m_GroupsList = Connection.User.Groups);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Page> GetLikedPagesList()
           {
-               return m_LikedPagesList ?? (m_LikedPagesList = s_User.LikedPages);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_LikedPagesList ?? (m_LikedPagesList = Connection.User.LikedPages);
+               }
+               return null;
           }
 
           public FacebookObjectCollection<User> GetFriendsList()
           {
-               return m_FriendsList ?? (m_FriendsList = s_User.Friends);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_FriendsList ?? (m_FriendsList = Connection.User.Friends);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Page> GetSameLikedPagesList(FacebookObjectCollection<Page> i_SelectedFriendLikedPages)
           {
                FacebookObjectCollection<Page> commonLikedPages = new FacebookObjectCollection<Page>();
 
-               foreach (Page userLikedPage in s_User.LikedPages)
+               if (!Connection.IsLoggedIn())
+               {
+                    return null;
+               }
+
+               foreach (Page userLikedPage in Connection.User.LikedPages)
                {
                     foreach (Page selectedFriendLikedPage in i_SelectedFriendLikedPages)
                     {
@@ -161,15 +195,15 @@ namespace FacebookWinFormsApp
 
           public Status PostStatus(string i_Text)
           {
-               return s_User.PostStatus(i_Text);
+               return Connection.User.PostStatus(i_Text);
           }
 
           public Post GetPostByText(string i_SelectedText)
           {
                return i_SelectedText.Contains(k_PictureUrlStartString)
-                    ? s_User.Posts
+                    ? Connection.User.Posts
                          .FirstOrDefault(post => post.PictureURL == i_SelectedText)
-                    : s_User.Posts
+                    : Connection.User.Posts
                          .FirstOrDefault(post => post.Message == i_SelectedText);
           }
      }

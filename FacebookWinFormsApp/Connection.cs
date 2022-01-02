@@ -38,6 +38,11 @@ namespace FacebookWinFormsApp
                LoginDetected?.Invoke();
           }
 
+          public static bool IsLoggedIn()
+          {
+               return User != null;
+          }
+
           public static void Logout()
           {
                FacebookService.Logout();
