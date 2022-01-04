@@ -21,7 +21,6 @@ namespace FacebookWinFormsApp.Forms
           private void resetContent()
           {
                richTextBoxStatistics.Text = string.Empty;
-               textBoxNumberOfPosts.Text = string.Empty;
                textBoxNumberOfFriends.Text = string.Empty;
                textBoxNumberOfEvents.Text = string.Empty;
                textBoxNumberOfGroups.Text = string.Empty;
@@ -32,9 +31,6 @@ namespace FacebookWinFormsApp.Forms
           {
                m_UserStatistics = new Dictionary<string, string>
                     {
-                         {
-                         "posts", FacebookApi.GetPostsList().Count.ToString()
-                         },
                          {
                          "friends", FacebookApi.GetFriendsList().Count.ToString()
                          },
@@ -49,7 +45,6 @@ namespace FacebookWinFormsApp.Forms
                     }
                     };
 
-               textBoxNumberOfPosts.Text = m_UserStatistics["posts"];
                textBoxNumberOfFriends.Text = m_UserStatistics["friends"];
                textBoxNumberOfEvents.Text = m_UserStatistics["events"];
                textBoxNumberOfGroups.Text = m_UserStatistics["groups"];

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using FacebookWrapper;
+using FacebookWinFormsApp.Iterators;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookWinFormsApp
@@ -19,7 +18,7 @@ namespace FacebookWinFormsApp
           private Dictionary<string, int> m_LikesByCategory;
           private string m_UsernameText;
           private string m_UserImageURL;
-          private FacebookObjectCollection<Post> m_PostsList;
+          private PostsList m_PostsList;
           private FacebookObjectCollection<Album> m_AlbumsList;
           private FacebookObjectCollection<Event> m_EventsList;
           private FacebookObjectCollection<Group> m_GroupsList;
@@ -86,11 +85,23 @@ namespace FacebookWinFormsApp
                return m_UserImageURL;
           }
 
-          public FacebookObjectCollection<Post> GetPostsList()
+          private void setPostsListFromApi()
+          {
+               List<Post> tempPostsList = Connection.User.Posts.ToList();
+
+               m_PostsList = new PostsList(tempPostsList);
+          }
+
+          public IIterator GetPostsIterator()
           {
                if (Connection.IsLoggedIn())
                {
-                    return m_PostsList ?? (m_PostsList = Connection.User.Posts);
+                    if (m_PostsList == null)
+                    {
+                         setPostsListFromApi();
+                    }
+
+                    return m_PostsList.CreateIterator();
                }
 
                return null;
