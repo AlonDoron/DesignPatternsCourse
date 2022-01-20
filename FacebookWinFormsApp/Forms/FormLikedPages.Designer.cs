@@ -40,6 +40,7 @@ namespace FacebookWinFormsApp.Forms
                this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
                this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
                this.nameTextBox = new System.Windows.Forms.TextBox();
+               this.button1 = new System.Windows.Forms.Button();
                imageNormalLabel = new System.Windows.Forms.Label();
                nameLabel = new System.Windows.Forms.Label();
                ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
@@ -112,12 +113,23 @@ namespace FacebookWinFormsApp.Forms
                this.nameTextBox.Size = new System.Drawing.Size(100, 20);
                this.nameTextBox.TabIndex = 14;
                // 
+               // button1
+               // 
+               this.button1.Location = new System.Drawing.Point(661, 434);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(75, 23);
+               this.button1.TabIndex = 15;
+               this.button1.Text = "Close";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.button1_Click);
+               // 
                // FormLikedPages
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(221)))), ((int)(((byte)(247)))));
-               this.ClientSize = new System.Drawing.Size(800, 519);
+               this.ClientSize = new System.Drawing.Size(875, 519);
+               this.Controls.Add(this.button1);
                this.Controls.Add(this.descriptionRichTextBox);
                this.Controls.Add(imageNormalLabel);
                this.Controls.Add(this.imageNormalPictureBox);
@@ -142,5 +154,6 @@ namespace FacebookWinFormsApp.Forms
           private System.Windows.Forms.RichTextBox descriptionRichTextBox;
           private System.Windows.Forms.PictureBox imageNormalPictureBox;
           private System.Windows.Forms.TextBox nameTextBox;
+          private System.Windows.Forms.Button button1;
      }
 }

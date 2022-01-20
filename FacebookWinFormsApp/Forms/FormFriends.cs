@@ -8,10 +8,13 @@ namespace FacebookWinFormsApp.Forms
      {
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           public FormFriends()
           {
                InitializeComponent();
                Connection.LogoutDetected += InitializeComponent;
+               r_InitPageVisitor = new InitPageVisitor();
           }
 
           public void ShowFriendsList()
@@ -77,6 +80,11 @@ namespace FacebookWinFormsApp.Forms
                          System.Diagnostics.Process.Start(selectedPage.URL);
                     }
                }
+          }
+
+          private void button1_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }

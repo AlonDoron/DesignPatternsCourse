@@ -42,6 +42,7 @@
                this.endTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
                this.nameTextBox = new System.Windows.Forms.TextBox();
                this.startTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
+               this.button1 = new System.Windows.Forms.Button();
                descriptionLabel = new System.Windows.Forms.Label();
                endTimeLabel = new System.Windows.Forms.Label();
                nameLabel = new System.Windows.Forms.Label();
@@ -157,12 +158,23 @@
                this.startTimeDateTimePicker.Size = new System.Drawing.Size(200, 20);
                this.startTimeDateTimePicker.TabIndex = 9;
                // 
+               // button1
+               // 
+               this.button1.Location = new System.Drawing.Point(668, 27);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(75, 23);
+               this.button1.TabIndex = 4;
+               this.button1.Text = "Close";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.button1_Click);
+               // 
                // FormEvents
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(221)))), ((int)(((byte)(247)))));
                this.ClientSize = new System.Drawing.Size(800, 728);
+               this.Controls.Add(this.button1);
                this.Controls.Add(this.panel1);
                this.Controls.Add(this.pictureBoxEvents);
                this.Controls.Add(this.listBoxEvents);
@@ -186,5 +198,6 @@
           private System.Windows.Forms.DateTimePicker endTimeDateTimePicker;
           private System.Windows.Forms.TextBox nameTextBox;
           private System.Windows.Forms.DateTimePicker startTimeDateTimePicker;
+          private System.Windows.Forms.Button button1;
      }
 }

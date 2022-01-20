@@ -145,6 +145,7 @@
       <DependentUpon>FormPosts.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PostObject.cs" />
+    <Compile Include="InitPageVisitor.cs" />
     <Compile Include="Iterators\PostsList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

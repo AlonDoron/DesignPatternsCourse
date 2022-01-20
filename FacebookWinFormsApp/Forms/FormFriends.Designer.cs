@@ -44,6 +44,7 @@
                this.birthdayTextBox = new System.Windows.Forms.TextBox();
                this.lastNameTextBox = new System.Windows.Forms.TextBox();
                this.firstNameTextBox = new System.Windows.Forms.TextBox();
+               this.button1 = new System.Windows.Forms.Button();
                birthdayLabel = new System.Windows.Forms.Label();
                lastNameLabel = new System.Windows.Forms.Label();
                firstNameLabel = new System.Windows.Forms.Label();
@@ -170,12 +171,23 @@
                this.firstNameTextBox.Size = new System.Drawing.Size(100, 20);
                this.firstNameTextBox.TabIndex = 7;
                // 
+               // button1
+               // 
+               this.button1.Location = new System.Drawing.Point(727, 395);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(75, 23);
+               this.button1.TabIndex = 12;
+               this.button1.Text = "Close";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.button1_Click);
+               // 
                // FormFriends
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(221)))), ((int)(((byte)(247)))));
                this.ClientSize = new System.Drawing.Size(888, 471);
+               this.Controls.Add(this.button1);
                this.Controls.Add(birthdayLabel);
                this.Controls.Add(this.birthdayTextBox);
                this.Controls.Add(this.label3);
@@ -211,5 +223,6 @@
           private System.Windows.Forms.TextBox birthdayTextBox;
           private System.Windows.Forms.TextBox firstNameTextBox;
           private System.Windows.Forms.TextBox lastNameTextBox;
+          private System.Windows.Forms.Button button1;
      }
 }

@@ -8,10 +8,13 @@ namespace FacebookWinFormsApp.Forms
      {
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           public FormGallery()
           {
                InitializeComponent();
                Connection.LogoutDetected += resetContent;
+               r_InitPageVisitor = new InitPageVisitor();
           }
 
           private void resetContent()
@@ -91,6 +94,11 @@ namespace FacebookWinFormsApp.Forms
           private void buttonShowAllPhotos_Click(object sender, EventArgs e)
           {
                loadImagesList();
+          }
+
+          private void button1_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }

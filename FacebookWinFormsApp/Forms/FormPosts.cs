@@ -10,6 +10,8 @@ namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPosts : Form
      {
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           public List<PostObject> m_FavoritePosts;
           private Post m_CurrentSelectedPost;
 
@@ -20,6 +22,7 @@ namespace FacebookWinFormsApp.Forms
                loadFavoritesPosts();
                InitializeComponent();
                loadPostsList();
+               r_InitPageVisitor = new InitPageVisitor();
 
                Connection.LogoutDetected += resetContent;
           }
@@ -220,6 +223,11 @@ namespace FacebookWinFormsApp.Forms
                {
                     loadPostsList(); // If we de-selected "Show Favorite Posts"
                }
+          }
+
+          private void button1_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }

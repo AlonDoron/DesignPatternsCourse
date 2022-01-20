@@ -6,6 +6,8 @@ namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPersonalityStatistics : Form
      {
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           private Dictionary<string, string> m_UserStatistics;
 
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
@@ -14,6 +16,7 @@ namespace FacebookWinFormsApp.Forms
           {
                InitializeComponent();
                initializeStatistics();
+               r_InitPageVisitor = new InitPageVisitor();
 
                Connection.LogoutDetected += resetContent;
           }
@@ -71,6 +74,11 @@ namespace FacebookWinFormsApp.Forms
                {
                     richTextBoxStatistics.Text += $"You liked { pair.Value } pages in the category: { pair.Key } \n";
                }
+          }
+
+          private void button1_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }
