@@ -82,7 +82,7 @@ namespace FacebookWinFormsApp.Forms
                }
           }
 
-          private void button1_Click(object sender, EventArgs e)
+          private void buttonClose_Click(object sender, EventArgs e)
           {
                r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }

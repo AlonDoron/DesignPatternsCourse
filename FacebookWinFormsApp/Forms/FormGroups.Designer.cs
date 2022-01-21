@@ -37,7 +37,7 @@
                this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
                this.nameTextBox = new System.Windows.Forms.TextBox();
                this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
-               this.button1 = new System.Windows.Forms.Button();
+               this.buttonClose = new System.Windows.Forms.Button();
                nameLabel = new System.Windows.Forms.Label();
                descriptionLabel = new System.Windows.Forms.Label();
                ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).BeginInit();
@@ -102,15 +102,15 @@
                this.descriptionRichTextBox.TabIndex = 9;
                this.descriptionRichTextBox.Text = string.Empty;
                // 
-               // button1
+               // buttonClose
                // 
-               this.button1.Location = new System.Drawing.Point(694, 387);
-               this.button1.Name = "button1";
-               this.button1.Size = new System.Drawing.Size(75, 23);
-               this.button1.TabIndex = 10;
-               this.button1.Text = "Close";
-               this.button1.UseVisualStyleBackColor = true;
-               this.button1.Click += new System.EventHandler(this.button1_Click);
+               this.buttonClose.Location = new System.Drawing.Point(694, 387);
+               this.buttonClose.Name = "buttonClose";
+               this.buttonClose.Size = new System.Drawing.Size(75, 23);
+               this.buttonClose.TabIndex = 10;
+               this.buttonClose.Text = "Close";
+               this.buttonClose.UseVisualStyleBackColor = true;
+               this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
                // 
                // FormGroups
                // 
@@ -118,7 +118,7 @@
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(221)))), ((int)(((byte)(247)))));
                this.ClientSize = new System.Drawing.Size(909, 450);
-               this.Controls.Add(this.button1);
+               this.Controls.Add(this.buttonClose);
                this.Controls.Add(descriptionLabel);
                this.Controls.Add(this.descriptionRichTextBox);
                this.Controls.Add(this.imageNormalPictureBox);
@@ -141,6 +141,6 @@
           private System.Windows.Forms.PictureBox imageNormalPictureBox;
           private System.Windows.Forms.TextBox nameTextBox;
           private System.Windows.Forms.RichTextBox descriptionRichTextBox;
-          private System.Windows.Forms.Button button1;
+          private System.Windows.Forms.Button buttonClose;
      }
 }

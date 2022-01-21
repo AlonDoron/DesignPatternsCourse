@@ -33,7 +33,7 @@
                this.listBoxPhotos = new System.Windows.Forms.ListBox();
                this.buttonAlbums = new System.Windows.Forms.Button();
                this.buttonShowAllPhotos = new System.Windows.Forms.Button();
-               this.button1 = new System.Windows.Forms.Button();
+               this.buttonClose = new System.Windows.Forms.Button();
                ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAlbum)).BeginInit();
                this.SuspendLayout();
                // 
@@ -86,15 +86,15 @@
                this.buttonShowAllPhotos.UseVisualStyleBackColor = false;
                this.buttonShowAllPhotos.Click += new System.EventHandler(this.buttonShowAllPhotos_Click);
                // 
-               // button1
+               // buttonClose
                // 
-               this.button1.Location = new System.Drawing.Point(636, 33);
-               this.button1.Name = "button1";
-               this.button1.Size = new System.Drawing.Size(75, 23);
-               this.button1.TabIndex = 63;
-               this.button1.Text = "Close";
-               this.button1.UseVisualStyleBackColor = true;
-               this.button1.Click += new System.EventHandler(this.button1_Click);
+               this.buttonClose.Location = new System.Drawing.Point(636, 33);
+               this.buttonClose.Name = "buttonClose";
+               this.buttonClose.Size = new System.Drawing.Size(75, 23);
+               this.buttonClose.TabIndex = 63;
+               this.buttonClose.Text = "Close";
+               this.buttonClose.UseVisualStyleBackColor = true;
+               this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
                // 
                // FormGallery
                // 
@@ -102,7 +102,7 @@
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(221)))), ((int)(((byte)(247)))));
                this.ClientSize = new System.Drawing.Size(800, 450);
-               this.Controls.Add(this.button1);
+               this.Controls.Add(this.buttonClose);
                this.Controls.Add(this.buttonShowAllPhotos);
                this.Controls.Add(this.buttonAlbums);
                this.Controls.Add(this.pictureBoxAlbum);
@@ -119,6 +119,6 @@
           private System.Windows.Forms.ListBox listBoxPhotos;
           private System.Windows.Forms.Button buttonAlbums;
           private System.Windows.Forms.Button buttonShowAllPhotos;
-          private System.Windows.Forms.Button button1;
+          private System.Windows.Forms.Button buttonClose;
      }
 }
