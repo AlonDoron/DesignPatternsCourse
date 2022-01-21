@@ -8,9 +8,19 @@ namespace FacebookWinFormsApp.Forms
      {
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           public FormEvents()
           {
                InitializeComponent();
+               Connection.LogoutDetected += resetContent;
+               r_InitPageVisitor = new InitPageVisitor();
+          }
+
+          private void resetContent()
+          {
+               listBoxEvents = new ListBox();
+               pictureBoxEvents = new PictureBox();
           }
 
           public void FetchEvents()
@@ -40,6 +50,11 @@ namespace FacebookWinFormsApp.Forms
                {
                     pictureBoxEvents.LoadAsync(i_SelectedEvent.Cover.SourceURL);
                }
+          }
+
+          private void buttonClose_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }

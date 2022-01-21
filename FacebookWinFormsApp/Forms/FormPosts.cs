@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using FacebookWinFormsApp.Iterators;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPosts : Form
      {
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           public List<PostObject> m_FavoritePosts;
           private Post m_CurrentSelectedPost;
 
@@ -19,6 +22,17 @@ namespace FacebookWinFormsApp.Forms
                loadFavoritesPosts();
                InitializeComponent();
                loadPostsList();
+               r_InitPageVisitor = new InitPageVisitor();
+
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               m_CurrentSelectedPost = null;
+               m_FavoritePosts = null;
+               listBoxPosts.Items.Clear();
+               pictureBoxPostImage.Image = null;
           }
 
           private void loadFavoritesPosts()
@@ -29,29 +43,35 @@ namespace FacebookWinFormsApp.Forms
           private void loadPostsList()
           {
                listBoxPosts.Items.Clear();
+               IIterator postsIterator = FacebookApi.GetPostsIterator();
 
-               foreach (Post post in FacebookApi.GetPostsList())
+               while (postsIterator.MoveNext())
                {
-                    if (post.Message != null)
-                    {
-                         listBoxPosts.Items.Add(post.Message);
-                    }
-                    else if (post.Caption != null)
-                    {
-                         listBoxPosts.Items.Add(post.Caption);
-                    }
-                    else
-                    {
-                         if (post.Type == Post.eType.photo)
-                         {
-                              listBoxPosts.Items.Add(post.PictureURL);
-                         }
-                    }
+                    insertPostToListBoxPosts(postsIterator.Current as Post);
                }
 
                if (listBoxPosts.Items.Count == 0)
                {
                     MessageBox.Show("No Posts to retrieve :(");
+               }
+          }
+
+          private void insertPostToListBoxPosts(Post i_Post)
+          {
+               if (i_Post.Message != null)
+               {
+                    listBoxPosts.Items.Add(i_Post.Message);
+               }
+               else if (i_Post.Caption != null)
+               {
+                    listBoxPosts.Items.Add(i_Post.Caption);
+               }
+               else
+               {
+                    if (i_Post.Type == Post.eType.photo)
+                    {
+                         listBoxPosts.Items.Add(i_Post.PictureURL);
+                    }
                }
           }
 
@@ -187,8 +207,11 @@ namespace FacebookWinFormsApp.Forms
                {
                     foreach (PostObject favoritePost in m_FavoritePosts)
                     {
-                         foreach (Post postFromUserData in FacebookApi.GetPostsList())
+                         IIterator postsIterator = FacebookApi.GetPostsIterator();
+                         while (postsIterator.MoveNext())
                          {
+                              Post postFromUserData = postsIterator.Current as Post;
+
                               if (favoritePost.m_CreatedTime == postFromUserData.CreatedTime)
                               {
                                    listBoxPosts.Items.Add(favoritePost.m_Message);
@@ -200,6 +223,11 @@ namespace FacebookWinFormsApp.Forms
                {
                     loadPostsList(); // If we de-selected "Show Favorite Posts"
                }
+          }
+
+          private void buttonClose_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }

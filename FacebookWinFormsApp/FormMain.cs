@@ -16,18 +16,25 @@ namespace FacebookWinFormsApp
           {
                InitializeComponent();
                FacebookService.s_CollectionLimit = 100;
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               m_ActiveForm.Hide();
+               m_ActiveForm = null;
+               panelSidebar.Hide();
+               buttonLogin.Show();
           }
 
           private void buttonLogin_Click(object sender, EventArgs e)
           {
                Clipboard.SetText("alon121211@gmail.com");
 
-               LoginResult loginResult = FacebookApi.Login();
+               Connection.Login();
 
-               if (!string.IsNullOrEmpty(loginResult.AccessToken))
+               if (Connection.User != null)
                {
-                    FacebookApi.SetUser(loginResult.LoggedInUser);
-
                     setUserImage(FacebookApi.GetUserImageURL());
 
                     labelUsername.Text = FacebookApi.GetUsernameText();
@@ -37,7 +44,7 @@ namespace FacebookWinFormsApp
                }
                else
                {
-                    MessageBox.Show(loginResult.ErrorMessage, "Login Failed");
+                    MessageBox.Show("Failed to connect with selected user.", "Login Failed");
                }
           }
 
@@ -49,7 +56,7 @@ namespace FacebookWinFormsApp
           private void buttonLogout_Click(object sender, EventArgs e)
           {
                FacebookService.LogoutWithUI();
-               this.Close();
+               Connection.Logout();
           }
 
           private void openChildForm(Form i_childForm)

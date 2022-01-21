@@ -7,9 +7,21 @@ namespace FacebookWinFormsApp.Forms
      {
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
 
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           public FormGroups()
           {
                InitializeComponent();
+               Connection.LogoutDetected += resetContent;
+               r_InitPageVisitor = new InitPageVisitor();
+          }
+
+          private void resetContent()
+          {
+               listBoxGroups = new ListBox();
+               descriptionRichTextBox.Text = string.Empty;
+               nameTextBox.Text = string.Empty;
+               imageNormalPictureBox.Image = null;
           }
 
           public void LoadGroups()
@@ -23,6 +35,11 @@ namespace FacebookWinFormsApp.Forms
                     MessageBox.Show(e.Message);
                     throw;
                }
+          }
+
+          private void buttonClose_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }

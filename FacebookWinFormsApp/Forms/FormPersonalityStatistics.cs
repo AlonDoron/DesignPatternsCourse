@@ -6,6 +6,8 @@ namespace FacebookWinFormsApp.Forms
 {
      public partial class FormPersonalityStatistics : Form
      {
+          private readonly InitPageVisitor r_InitPageVisitor;
+
           private Dictionary<string, string> m_UserStatistics;
 
           private FacebookApiFacade FacebookApi { get; } = FacebookApiFacade.Instance;
@@ -14,15 +16,24 @@ namespace FacebookWinFormsApp.Forms
           {
                InitializeComponent();
                initializeStatistics();
+               r_InitPageVisitor = new InitPageVisitor();
+
+               Connection.LogoutDetected += resetContent;
+          }
+
+          private void resetContent()
+          {
+               richTextBoxStatistics.Text = string.Empty;
+               textBoxNumberOfFriends.Text = string.Empty;
+               textBoxNumberOfEvents.Text = string.Empty;
+               textBoxNumberOfGroups.Text = string.Empty;
+               textBoxNumberOfLikedPages.Text = string.Empty;
           }
 
           private void initializeStatistics()
           {
                m_UserStatistics = new Dictionary<string, string>
                     {
-                         {
-                         "posts", FacebookApi.GetPostsList().Count.ToString()
-                         },
                          {
                          "friends", FacebookApi.GetFriendsList().Count.ToString()
                          },
@@ -37,7 +48,6 @@ namespace FacebookWinFormsApp.Forms
                     }
                     };
 
-               textBoxNumberOfPosts.Text = m_UserStatistics["posts"];
                textBoxNumberOfFriends.Text = m_UserStatistics["friends"];
                textBoxNumberOfEvents.Text = m_UserStatistics["events"];
                textBoxNumberOfGroups.Text = m_UserStatistics["groups"];
@@ -64,6 +74,11 @@ namespace FacebookWinFormsApp.Forms
                {
                     richTextBoxStatistics.Text += $"You liked { pair.Value } pages in the category: { pair.Key } \n";
                }
+          }
+
+          private void buttonClose_Click(object sender, EventArgs e)
+          {
+               r_InitPageVisitor.ShowEffectAndGoToInitPage(this);
           }
      }
 }

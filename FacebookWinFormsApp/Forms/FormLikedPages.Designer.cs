@@ -40,6 +40,7 @@ namespace FacebookWinFormsApp.Forms
                this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
                this.imageNormalPictureBox = new System.Windows.Forms.PictureBox();
                this.nameTextBox = new System.Windows.Forms.TextBox();
+               this.buttonClose = new System.Windows.Forms.Button();
                imageNormalLabel = new System.Windows.Forms.Label();
                nameLabel = new System.Windows.Forms.Label();
                ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
@@ -76,7 +77,6 @@ namespace FacebookWinFormsApp.Forms
                // listBoxLikedPages
                // 
                this.listBoxLikedPages.DataSource = this.pageBindingSource;
-               this.listBoxLikedPages.DisplayMember = "Name";
                this.listBoxLikedPages.FormattingEnabled = true;
                this.listBoxLikedPages.Location = new System.Drawing.Point(36, 48);
                this.listBoxLikedPages.Name = "listBoxLikedPages";
@@ -113,12 +113,23 @@ namespace FacebookWinFormsApp.Forms
                this.nameTextBox.Size = new System.Drawing.Size(100, 20);
                this.nameTextBox.TabIndex = 14;
                // 
+               // buttonClose
+               // 
+               this.buttonClose.Location = new System.Drawing.Point(661, 434);
+               this.buttonClose.Name = "buttonClose";
+               this.buttonClose.Size = new System.Drawing.Size(75, 23);
+               this.buttonClose.TabIndex = 15;
+               this.buttonClose.Text = "Close";
+               this.buttonClose.UseVisualStyleBackColor = true;
+               this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+               // 
                // FormLikedPages
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(221)))), ((int)(((byte)(247)))));
-               this.ClientSize = new System.Drawing.Size(800, 519);
+               this.ClientSize = new System.Drawing.Size(875, 519);
+               this.Controls.Add(this.buttonClose);
                this.Controls.Add(this.descriptionRichTextBox);
                this.Controls.Add(imageNormalLabel);
                this.Controls.Add(this.imageNormalPictureBox);
@@ -143,5 +154,6 @@ namespace FacebookWinFormsApp.Forms
           private System.Windows.Forms.RichTextBox descriptionRichTextBox;
           private System.Windows.Forms.PictureBox imageNormalPictureBox;
           private System.Windows.Forms.TextBox nameTextBox;
+          private System.Windows.Forms.Button buttonClose;
      }
 }

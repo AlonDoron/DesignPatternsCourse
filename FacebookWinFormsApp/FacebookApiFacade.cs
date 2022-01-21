@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FacebookWrapper;
+using FacebookWinFormsApp.Iterators;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookWinFormsApp
@@ -10,16 +10,15 @@ namespace FacebookWinFormsApp
      {
           private const string k_PictureUrlStartString = "https://";
           private static readonly object sr_FacadeCreateLock = new object();
-          private static User s_User;
 
           private static FacebookApiFacade s_Instance;
 
           #region Caching Proxy Data
 
-          private readonly Dictionary<string, int> m_LikesByCategory;
+          private Dictionary<string, int> m_LikesByCategory;
           private string m_UsernameText;
           private string m_UserImageURL;
-          private FacebookObjectCollection<Post> m_PostsList;
+          private PostsList m_PostsList;
           private FacebookObjectCollection<Album> m_AlbumsList;
           private FacebookObjectCollection<Event> m_EventsList;
           private FacebookObjectCollection<Group> m_GroupsList;
@@ -50,38 +49,27 @@ namespace FacebookWinFormsApp
           private FacebookApiFacade()
           {
                m_LikesByCategory = new Dictionary<string, int>();
+               Connection.LogoutDetected += resetFacade;
           }
 
-          public LoginResult Login()
+          private void resetFacade()
           {
-               return FacebookService.Login(
-                    "2016566511844897",
-                    "email",
-                    "public_profile",
-                    "user_age_range",
-                    "user_birthday",
-                    "user_events",
-                    "user_friends",
-                    "user_gender",
-                    "user_hometown",
-                    "user_likes",
-                    "user_link",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_videos");
-          }
-
-          public void SetUser(User i_User)
-          {
-               s_User = i_User;
+               m_UsernameText = string.Empty;
+               m_UserImageURL = string.Empty;
+               m_LikesByCategory = null;
+               m_PostsList = null;
+               m_AlbumsList = null;
+               m_EventsList = null;
+               m_GroupsList = null;
+               m_LikedPagesList = null;
+               m_FriendsList = null;
           }
 
           public string GetUsernameText()
           {
-               if (m_UsernameText == string.Empty)
+               if (Connection.IsLoggedIn() && m_UsernameText == string.Empty)
                {
-                    m_UsernameText = s_User.Name;
+                    m_UsernameText = Connection.User.Name;
                }
 
                return m_UsernameText;
@@ -89,49 +77,96 @@ namespace FacebookWinFormsApp
 
           public string GetUserImageURL()
           {
-               if (string.IsNullOrEmpty(m_UserImageURL))
+               if (Connection.IsLoggedIn() && string.IsNullOrEmpty(m_UserImageURL))
                {
-                    m_UserImageURL = s_User.PictureNormalURL;
+                    m_UserImageURL = Connection.User.PictureNormalURL;
                }
 
                return m_UserImageURL;
           }
 
-          public FacebookObjectCollection<Post> GetPostsList()
+          private void setPostsListFromApi()
           {
-               return m_PostsList ?? (m_PostsList = s_User.Posts);
+               List<Post> tempPostsList = Connection.User.Posts.ToList();
+
+               m_PostsList = new PostsList(tempPostsList);
+          }
+
+          public IIterator GetPostsIterator()
+          {
+               if (Connection.IsLoggedIn())
+               {
+                    if (m_PostsList == null)
+                    {
+                         setPostsListFromApi();
+                    }
+
+                    return m_PostsList.CreateIterator();
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Album> GetAlbumsList()
           {
-               return m_AlbumsList ?? (m_AlbumsList = s_User.Albums);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_AlbumsList ?? (m_AlbumsList = Connection.User.Albums);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Event> GetEventsList()
           {
-               return m_EventsList ?? (m_EventsList = s_User.Events);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_EventsList ?? (m_EventsList = Connection.User.Events);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Group> GetGroupsList()
           {
-               return m_GroupsList ?? (m_GroupsList = s_User.Groups);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_GroupsList ?? (m_GroupsList = Connection.User.Groups);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Page> GetLikedPagesList()
           {
-               return m_LikedPagesList ?? (m_LikedPagesList = s_User.LikedPages);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_LikedPagesList ?? (m_LikedPagesList = Connection.User.LikedPages);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<User> GetFriendsList()
           {
-               return m_FriendsList ?? (m_FriendsList = s_User.Friends);
+               if (Connection.IsLoggedIn())
+               {
+                    return m_FriendsList ?? (m_FriendsList = Connection.User.Friends);
+               }
+
+               return null;
           }
 
           public FacebookObjectCollection<Page> GetSameLikedPagesList(FacebookObjectCollection<Page> i_SelectedFriendLikedPages)
           {
                FacebookObjectCollection<Page> commonLikedPages = new FacebookObjectCollection<Page>();
 
-               foreach (Page userLikedPage in s_User.LikedPages)
+               if (!Connection.IsLoggedIn())
+               {
+                    return null;
+               }
+
+               foreach (Page userLikedPage in Connection.User.LikedPages)
                {
                     foreach (Page selectedFriendLikedPage in i_SelectedFriendLikedPages)
                     {
@@ -172,15 +207,15 @@ namespace FacebookWinFormsApp
 
           public Status PostStatus(string i_Text)
           {
-               return s_User.PostStatus(i_Text);
+               return Connection.User.PostStatus(i_Text);
           }
 
           public Post GetPostByText(string i_SelectedText)
           {
                return i_SelectedText.Contains(k_PictureUrlStartString)
-                    ? s_User.Posts
+                    ? Connection.User.Posts
                          .FirstOrDefault(post => post.PictureURL == i_SelectedText)
-                    : s_User.Posts
+                    : Connection.User.Posts
                          .FirstOrDefault(post => post.Message == i_SelectedText);
           }
      }

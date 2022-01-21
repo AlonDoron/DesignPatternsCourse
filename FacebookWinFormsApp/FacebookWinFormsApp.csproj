@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection.cs" />
     <Compile Include="FacebookApiFacade.cs" />
     <Compile Include="FilesHandler.cs" />
     <Compile Include="FormFactory.cs" />
@@ -144,6 +145,8 @@
       <DependentUpon>FormPosts.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PostObject.cs" />
+    <Compile Include="InitPageVisitor.cs" />
+    <Compile Include="Iterators\PostsList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
@@ -203,6 +206,7 @@
     <Content Include="FBApi\Facebook.dll" />
     <Content Include="FBApi\FbGraphApiWrapper.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

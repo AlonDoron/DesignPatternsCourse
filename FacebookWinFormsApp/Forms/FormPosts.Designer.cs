@@ -38,6 +38,7 @@ namespace FacebookWinFormsApp.Forms
                this.pictureBoxPostImage = new System.Windows.Forms.PictureBox();
                this.checkBoxShowFavoritePosts = new System.Windows.Forms.CheckBox();
                this.label1 = new System.Windows.Forms.Label();
+               this.buttonClose = new System.Windows.Forms.Button();
                ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPostImage)).BeginInit();
                this.SuspendLayout();
                // 
@@ -108,12 +109,23 @@ namespace FacebookWinFormsApp.Forms
                this.label1.TabIndex = 56;
                this.label1.Text = "(Select a post, then right click on a post to show post options)";
                // 
+               // buttonClose
+               // 
+               this.buttonClose.Location = new System.Drawing.Point(631, 48);
+               this.buttonClose.Name = "buttonClose";
+               this.buttonClose.Size = new System.Drawing.Size(75, 23);
+               this.buttonClose.TabIndex = 57;
+               this.buttonClose.Text = "Close";
+               this.buttonClose.UseVisualStyleBackColor = true;
+               this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+               // 
                // FormPosts
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(221)))), ((int)(((byte)(247)))));
                this.ClientSize = new System.Drawing.Size(800, 450);
+               this.Controls.Add(this.buttonClose);
                this.Controls.Add(this.label1);
                this.Controls.Add(this.checkBoxShowFavoritePosts);
                this.Controls.Add(this.pictureBoxPostImage);
@@ -137,5 +149,6 @@ namespace FacebookWinFormsApp.Forms
           private PictureBox pictureBoxPostImage;
           private CheckBox checkBoxShowFavoritePosts;
           private Label label1;
+          private Button buttonClose;
      }
 }
